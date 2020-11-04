@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- ====  mapper 기본설정 ==== -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 루트 엘리먼트 & 네임스페이스 설정(프로젝트 전체 내에서 유일해야 한다.) -->
+<mapper namespace="Blog">
+	
+	<select id="getBigCategoryList" resultType="com.project.Blog.model.BlogBigCategoryVO">		
+		SELECT C.CATEGORY_NUMBER, C.CATEGORY_NAME, NVL(CNT, 0) AS CNT
+		FROM
+		(
+		    SELECT CATEGORY_NUMBER, COUNT(*) AS CNT
+		    FROM BLOGBOARD
+		    GROUP BY CATEGORY_NUMBER 
+		) B RIGHT OUTER JOIN BLOGCATEGORY_BIG C
+		ON B.CATEGORY_NUMBER = C.CATEGORY_NUMBER
+		ORDER BY CATEGORY_NUMBER
+	</select>
+	
+	<select id="getSmallCategoryList" resultType="com.project.Blog.model.BlogSmallCategoryVO">
+		SELECT C.CATEGORY_SNUMBER, C.CATEGORY_NAME, C.CATEGORY_NUMBER, NVL(CNT, 0) AS CNT
+		FROM
+		(
+		    SELECT CATEGORY_SNUMBER, COUNT(*) AS CNT
+		    FROM BLOGBOARD
+		    GROUP BY CATEGORY_SNUMBER 
+		) B RIGHT OUTER JOIN BLOGCATEGORY_SMALL C
+		ON B.CATEGORY_SNUMBER = C.CATEGORY_SNUMBER
+		ORDER BY C.CATEGORY_NUMBER, C.CATEGORY_SNUMBER
+	</select>
+	
+	<select id="getBlogBoardList" resultType="com.project.Blog.model.BlogBoardVO">
+		SELECT NUM, THUMBNAIL, TITLE, CONTENT, TO_CHAR(WRITEDAY, 'YYYY.MM.DD') AS WRITEDAY, CATEGORY_NUMBER, CATEGORY_SNUMBER, VIEWCOUNT, SUBCONTENT
+		FROM BLOGBOARD
+		ORDER BY NUM DESC
+	</select>
+	
+	<select id="getBlogBoardListSearch" resultType="com.project.Blog.model.BlogBoardVO" parameterType="String">
+		SELECT NUM, THUMBNAIL, TITLE, CONTENT, TO_CHAR(WRITEDAY, 'YYYY.MM.DD') AS WRITEDAY, CATEGORY_NUMBER, CATEGORY_SNUMBER, VIEWCOUNT, SUBCONTENT
+		FROM BLOGBOARD
+		WHERE UPPER(TITLE) LIKE UPPER('%'||#{searchWord}||'%') OR UPPER(CONTENT) LIKE UPPER('%'||#{searchWord}||'%') OR UPPER(SUBCONTENT) LIKE UPPER('%'||#{searchWord}||'%')
+		ORDER BY NUM DESC
+	</select>
+	
+	<select id="getBlogBoardListCategory" resultType="com.project.Blog.model.BlogBoardVO" parameterType="String">
+		SELECT NUM, THUMBNAIL, TITLE, CONTENT, TO_CHAR(WRITEDAY, 'YYYY.MM.DD') AS WRITEDAY, CATEGORY_NUMBER, CATEGORY_SNUMBER, VIEWCOUNT, SUBCONTENT
+		FROM BLOGBOARD
+		WHERE CATEGORY_NUMBER = #{categoryno} OR CATEGORY_SNUMBER = #{categoryno}
+		ORDER BY NUM DESC
+	</select>
+	
+<!-- 	<select id="getBlogBoardListCategorySmall" parameterType="String">
+		SELECT NUM, THUMBNAIL, TITLE, CONTENT, TO_CHAR(WRITEDAY, 'YYYY.MM.DD') AS WRITEDAY, CATEGORY_NUMBER, CATEGORY_SNUMBER, VIEWCOUNT, SUBCONTENT
+		FROM BLOGBOARD
+		WHERE CATEGORY_SNUMBER = #{categoryno}
+		ORDER BY NUM DESC
+	</select> -->
+	
+	<select id="getCategoryNameBig" resultType="String" parameterType="String">
+		SELECT CATEGORY_NAME
+		FROM BLOGCATEGORY_BIG
+		WHERE CATEGORY_NUMBER = #{categoryno}
+	</select>
+
+	<select id="getCategoryNameSmall" resultType="String" parameterType="String">
+		SELECT CATEGORY_NAME
+		FROM BLOGCATEGORY_SMALL
+		WHERE CATEGORY_SNUMBER = #{categoryno}
+	</select>
+	
+	<resultMap type="HashMap" id="boardMap">
+		<result property="num"				column="NUM"				javaType="String" />
+		<result property="thumbnail"		column="THUMBNAIL"			javaType="String" />
+		<result property="title"			column="TITLE"				javaType="String" />
+		<result property="content"			column="CONTENT"			jdbcType="CLOB" javaType="java.lang.String" />
+		<result property="writeday"			column="WRITEDAY"			javaType="String" />
+		<result property="category_number"	column="CATEGORY_NUMBER"	javaType="String" />
+		<result property="category_snumber"	column="CATEGORY_SNUMBER"	javaType="String" />
+		<result property="viewcount"		column="VIEWCOUNT"			javaType="String" />
+		<result property="subcontent"		column="SUBCONTENT"			jdbcType="CLOB" javaType="java.lang.String" />
+	</resultMap>
+	
+	<select id="getBoardView" resultMap="boardMap" parameterType="String">
+		SELECT NUM, THUMBNAIL, TITLE, CONTENT, TO_CHAR(WRITEDAY, 'YYYY.MM.DD') AS WRITEDAY, CATEGORY_NUMBER, CATEGORY_SNUMBER, VIEWCOUNT, SUBCONTENT
+		FROM BLOGBOARD
+		WHERE NUM = #{viewno}
+	</select>
+	
+</mapper>

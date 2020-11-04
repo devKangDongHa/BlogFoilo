@@ -1,0 +1,247 @@
+@charset "UTF-8";
+
+@import url('https://fonts.googleapis.com/css2?family=Turret+Road:wght@800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
+
+/* // 메인 화면 // */
+
+.mainAreaHead {
+	width: 100%;
+	height: 100vh;
+  	background-image: url("/BlogFolio/resources/image/main.jpg");
+  	background-attachment: fixed;
+  	background-position: bottom;
+  	background-repeat: no-repeat;
+  	background-size: cover;
+  	font-family: 'Turret Road', cursive;
+}
+
+.mainArea {
+	width: 100%;
+	height: 100vh;
+	display: grid;
+	grid-template-columns: 1fr 2fr 1fr;
+}
+
+.main_logo {
+	display: inline-block;
+	text-align: center;
+	z-index: 1;
+	background-color: rgba(0,0,0,0.5);
+}
+
+.main_logo a {
+	margin-top: 400px;
+	text-decoration: none;
+	display: block;
+}
+
+#main_BlogFolio {
+	border-left: 3px #ffffff solid;
+	border-right: 3px #ffffff solid;
+}
+
+.eng {
+	font-family: 'Turret Road', cursive;
+}
+
+.kor {
+	font-family: 'Jua', sans-serif;
+}
+
+/* // 블로그 click // */
+.BlogAreaHead {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0, 0.9);
+  overflow-x: hidden;
+  transition: 0.5s;
+}
+
+.BlogArea {
+    position: relative;
+    top: 50%;
+    width: 100%;
+    text-align: center;
+    margin-top: 30px;
+}
+
+.BlogAreaHead a {
+	text-decoration: none;
+	display: block;
+	transition: 0.3s;
+	text-align: center;
+}
+
+.BlogAreaHead a span{
+  padding: 8px;
+  font-size: 36px;
+  color: #818181;
+}
+
+.BlogAreaHead a:hover, .BlogAreaHead a:focus {
+  color: #f1f1f1;
+}
+
+.BlogAreaHead .closeBtn {
+  position: absolute;
+  top: 20px;
+  right: 45px;
+  font-size: 60px;
+  
+  padding: 8px;
+  color: #818181;
+}
+
+
+/* //포트폴리오 click // */
+.PortFolioAreaHead {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  right: 0;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0, 0.9);
+  overflow-x: hidden;
+  transition: 0.5s;
+}
+
+.PortFolioArea {
+    position: relative;
+    top: 50%;
+    width: 100%;
+    text-align: center;
+    margin-top: 30px;
+}
+
+.PortFolioAreaHead a {
+	text-decoration: none;
+	display: block;
+	transition: 0.3s;
+	text-align: center;
+}
+
+.PortFolioAreaHead a span{
+  padding: 8px;
+  font-size: 36px;
+  color: #818181;
+}
+
+.PortFolioAreaHead a:hover, .PortFolioAreaHead a:focus {
+  color: #f1f1f1;
+}
+
+.PortFolioAreaHead .closeBtn {
+  position: absolute;
+  top: 20px;
+  right: 45px;
+  font-size: 60px;
+  
+  padding: 8px;
+  color: #818181;
+}
+
+
+
+
+/* // hover animation // */
+
+.BlogSpan, .PortFolioSpan {
+  border: 5px solid transparent; 
+  -webkit-transition: all 0.4s cubic-bezier(.5, .24, 0, 1);
+  transition: all 0.4s cubic-bezier(.5, .24, 0, 1);
+}
+
+.BlogSpan::before, .PortFolioSpan::before {
+  content: '';
+  position: absolute;
+  left: -5px;
+  bottom: -5px;
+  z-index:-1;
+  width: 0%;
+  height: 5px;
+  background: #ffffff;
+  box-shadow: 0px 0px 0px 0px #6098FF;
+  display: block;
+  -webkit-transition: all 0.4s cubic-bezier(.5, .24, 0, 1);
+  transition: all 0.4s cubic-bezier(.5, .24, 0, 1)
+}
+
+.BlogSpan:hover::before {
+  width:103.5%;
+}
+
+.PortFolioSpan:hover::before {
+  width: 101.9%;
+}
+
+.BlogSpan::after, .PortFolioSpan::after {
+  content: '';
+  position: absolute;
+  right: -5px;
+  top: -5px;
+  z-index:-1;
+  width: 0%;
+  height: 5px;
+  background: #ffffff;
+  -webkit-transition: all 0.4s cubic-bezier(.5, .24, 0, 1);
+  transition: all 0.4s cubic-bezier(.5, .24, 0, 1)
+}
+
+.BlogSpan:hover::after {
+  width:103.5%;
+}
+
+.PortFolioSpan:hover::after {
+  width: 101.9%;
+}
+
+.BlogSpan:hover, .PortFolioSpan:hover {
+  border-left:5px solid #ffffff;
+  border-right:5px solid #ffffff;
+  font-size: 60pt;
+}
+
+.BlogSpan {
+	padding-top: 5px;
+	padding-bottom: 15px;
+	padding-left: 50px;
+	padding-right: 50px;
+  /* padding: 15px 50px; */
+  margin: 5px 4px;
+  color: #ffffff;
+  text-align: center;
+  position: relative;
+  text-decoration: none;
+  display:inline-block;
+  font-size: 48pt;
+}
+
+.PortFolioSpan {
+  padding: 15px 30px;
+  margin: 5px 4px;
+  color: #ffffff;
+  text-align: center;
+  position: relative;
+  text-decoration: none;
+  display:inline-block;
+  font-size: 48pt;
+}
+
+.BlogFolioSpan {
+  padding: 15px 30px;
+  margin: 5px 4px;
+  color: #ffffff;
+  text-align: center;
+  position: relative;
+  text-decoration: none;
+  display:inline-block;
+  font-size: 48pt;
+}

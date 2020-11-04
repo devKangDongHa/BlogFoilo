@@ -1,0 +1,110 @@
+@charset "UTF-8";
+
+#BlogContainer_View {
+	width: 966px;
+	margin: 0 auto;
+	border-top: 5px solid #000000;
+	padding-top: 30px;
+
+}
+
+#BlogMainContainer_View {
+	width: 100%;
+	overflow: hidden;
+	height: 100%;
+
+}
+
+#BlogLeftContainer_View {
+	float: left;
+	width: 75%;
+}
+
+#BlogRightContainer_View {
+	float: right;
+	width: 19%;
+	border-left: solid 1px #cccccc;
+	padding-left: 20px;
+	padding-top: 10px;
+}
+
+#BlogContentList_View {
+	width: 100%;
+	height: 100%;
+}
+
+.cateTitle_View {
+	font-size: 18pt;
+	font-weight: bold;
+}
+
+#BlogRightContainer_View ul {
+	list-style-type: none;
+	margin-top: 20px;
+	padding: 0;
+}
+
+.categoryParent_View {
+	font-size: 14pt;
+}
+
+.categoryParent_View li{
+	padding-left: 20px;
+}
+
+.categoryParent_View > li:first-child {
+	padding-left: 0 !important;
+}
+
+.categoryParent_View > li:not(:first-child) {
+	border-left: 1px solid #f0f0f0;
+}
+
+.categoryChildren_View {
+	padding-left: 30px;
+	font-size: 12pt;
+}
+
+#BlogRightContainer_View ul li {
+	padding-bottom: 20px;
+}
+
+.categoryChildren_View {
+	border-left: 1px solid #f0f0f0;
+}
+
+li a:hover {
+	text-decoration: underline;
+	cursor: pointer;
+} 
+
+.cnt_View {
+	font-weight: normal !important;
+	font-size: 12pt !important;
+	color: #bbbbbb;
+}
+
+.BlogCategory {
+	padding-right: 10px;
+}
+
+.BlogWriteDay {
+	padding-left: 10px;
+}
+
+.BlogCateDay {
+	font-size: 10pt;
+}
+
+.goCategory:hover {
+	text-decoration: underline;
+}
+
+#BlogContentHead_View {
+	width: 100%;
+	height: 150px;
+}
+
+#BlogContentBody_View {
+	width: 100%;
+}

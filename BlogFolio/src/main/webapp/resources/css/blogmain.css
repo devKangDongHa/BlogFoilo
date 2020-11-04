@@ -1,0 +1,152 @@
+@charset "UTF-8";
+
+#BlogContainer {
+	width: 966px;
+	margin: 0 auto;
+	border-top: 5px solid #000000;
+	padding-top: 30px;
+
+}
+
+#categoryname {
+	width: 100%;
+	height: 30px;
+	border-bottom: solid 1px #cccccc;
+	margin-bottom: 20px;
+	padding-left: 10px;
+	font-weight: bold;
+	font-size: 12pt;
+}
+
+#BlogMainContainer {
+	width: 100%;
+	overflow: hidden;
+	height: 100%;
+
+}
+
+#BlogLeftContainer {
+	float: left;
+	width: 75%;
+}
+
+#BlogContentList {
+	width: 100%;
+	height: 100%;
+}
+
+#BlogRightContainer {
+	float: right;
+	width: 19%;
+	border-left: solid 1px #cccccc;
+	padding-left: 20px;
+	padding-top: 10px;
+}
+
+#BlogContentList table {
+	width: 100%;
+	padding: 10px 30px;
+	border-collapse: collapse;
+}
+
+.BlogList {
+	height: 250px;
+	width: 100%;
+	border-bottom: 1px solid #cccccc;
+	vertical-align: top;
+}
+
+.BlogThumbNail {
+	width: 250px;
+	height: 250px;
+}
+
+.BlogHeadLine {
+	padding: 0 20px;
+}
+
+.BlogList td {
+	padding-bottom: 30px;
+}
+
+.BlogList:not(:first-child) td {
+	padding-top: 30px;	
+}
+
+.BlogContentTitle {
+	font-weight: bold;
+	font-size: 24pt;
+}
+
+.BlogContentTitle:hover {
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+.BlogCategory {
+	padding-right: 10px;
+}
+
+.BlogWriteDay {
+	padding-left: 10px;
+}
+
+.BlogCateDay {
+	font-size: 10pt;
+}
+
+.goCategory:hover {
+	text-decoration: underline;
+}
+
+/* // 카테고리 박스 // */
+.cateTitle {
+	font-size: 18pt;
+	font-weight: bold;
+}
+
+#BlogRightContainer ul {
+	list-style-type: none;
+	margin-top: 20px;
+	padding: 0;
+}
+
+.categoryParent {
+	font-size: 14pt;
+}
+
+.categoryParent li{
+	padding-left: 20px;
+}
+
+.categoryParent > li:first-child {
+	padding-left: 0 !important;
+}
+
+.categoryParent > li:not(:first-child) {
+	border-left: 1px solid #f0f0f0;
+}
+
+.categoryChildren {
+	padding-left: 30px;
+	font-size: 12pt;
+}
+
+#BlogRightContainer ul li {
+	padding-bottom: 20px;
+}
+
+.categoryChildren {
+	border-left: 1px solid #f0f0f0;
+}
+
+li a:hover {
+	text-decoration: underline;
+	cursor: pointer;
+} 
+
+.cnt {
+	font-weight: normal !important;
+	font-size: 12pt !important;
+	color: #bbbbbb;
+}

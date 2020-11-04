@@ -1,0 +1,177 @@
+@charset "UTF-8";
+
+@import url('https://fonts.googleapis.com/css2?family=Cute+Font&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Turret+Road:wght@800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap');
+
+a{
+	text-decoration: none;
+	color: #000000;
+}
+
+a:active {
+	color: #000000;
+}
+
+#BlogHeader {
+	width: 100%;
+	height: 80%;
+	background-color: #e6e600;
+}
+
+#BlogHeaderArea {
+	width: 966px;
+	height: 100%;
+	margin: 0 auto;
+}
+
+/* // 헤드 메뉴 // */
+
+#BlogHeadMenuArea {
+	height: 7%;
+	font-size: 16pt;
+	font-family: 'Cute Font', cursive;
+}
+
+#BlogMenuBox {
+	float: right;
+	margin: 10px 0 0 0;
+	padding: 0 20px;
+}
+
+#BloaHeadMenuBar {
+	margin: 0;
+	padding: 2px 0 0 0;
+}
+
+.BlogHeadMenu {
+	display: inline-block;
+	float: left;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-left: 3px;
+}
+
+.BlogHeadMenu a {
+	margin-right: -1px;
+}
+
+.BlogHeadMenu a span {
+	font-weight: bold;
+	font-size: 12pt;
+	width: 1px;
+	height: 11px;
+}
+
+/* // 대문 메뉴 // */
+
+#BlogHeadMainMenuArea {
+	width: 100%;
+	height: 20%;	
+	padding-top: 8%;
+	font-size: 30px;
+	font-family: 'Turret Road', cursive;
+}
+
+.BlogHeadMainMenu {
+	display: inline-block;
+}
+
+#BlogHeadMainMenuBar {
+	float: left;
+}
+
+#BlogHeadMainMenuBar li {
+	padding-right: 40px;
+}
+
+#headSearchBox {
+	float: right;
+	list-style-type: none;
+	padding: 0;
+}
+
+#headSearchBox li {
+	padding-right: 20px;
+}
+
+#headSearch {
+	padding: 6px;
+	font-size: 20px;
+	cursor: pointer;
+	border: none;
+}
+
+button {
+  float: left;
+  padding: 7px 10px;
+  margin-top: 8px;
+  background: #ddd;
+  font-size: 17px;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #ccc;
+}
+
+#showContact {
+	position: absolute;
+	top: 45px;
+	right: 535px;
+	background-color: #ffffff;
+	border: solid 1px black;
+	width: 150px;
+	height: 60px;
+	text-align: center;
+	font-size: 9pt;
+	line-height: 80%;
+}
+
+
+ /* 제목 */
+#headerTitle {
+	width: 400px;
+	height: 150px;
+	margin: 0 auto;
+	padding-top: 50px;
+	text-align: center;
+	font-family: 'Jua', sans-serif;
+} 
+
+#headerTitle span {
+	font-size: 56pt;
+}
+
+/* 검색창 */
+#headerSearch {
+	height: 50px;
+	width: 800px;
+	margin-left: 20px;
+	margin-top: 80px;
+	background-color: #ffffff;
+	padding-left: 20px;
+	padding-bottom: 10px;
+	border-radius: 10px;
+}
+
+#headerSearchForm {
+	height: 100%;
+}
+
+#headerSearchInput {
+	padding: 15px 20px;
+	width: 700px;
+	height: 30px;
+	font-family: 'Turret Road','Nanum Pen Script', cursive;
+	font-size: 20pt;
+	
+	border: none !important;
+	background-color: transparent !important;
+}
+
+#headerSearchInput:focus {
+	outline:none;
+}
