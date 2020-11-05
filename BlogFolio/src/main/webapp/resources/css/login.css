@@ -75,3 +75,50 @@ h1 {
 #guestbtnArea:hover {
 	cursor: pointer;
 }
+
+#loginContainer {
+	margin-bottom: -30px;
+	margin-left: 0;
+	width: 400px;
+	height: 200px;
+	text-align: center;
+	font-family: 'Jua', sans-serif;
+}
+
+#idbox, #pwbox {
+	margin-bottom: 10px;
+	text-align: center;
+	width: 300px;
+	margin-left: 30px;
+}
+
+label {
+	display: inline-block;
+	width: 40px;
+}
+.input {
+	padding: 10px 10px;
+}
+
+#loginbtn {
+	width: 100px;
+	height: 30px;
+	text-align: center;
+	vertical-align: middle;
+	margin-left: 150px;
+	margin-top: 30px;
+	border: 1px solid #000000;
+	background-color: #404040;
+	color: #ffffff;
+	border-radius: 50px;
+	font-size: 14pt;
+}
+
+#loginbtn:hover {
+	cursor: pointer;
+}
+
+#loginbtn > span {
+	display: inline-block;
+	margin-top: 5px;
+}

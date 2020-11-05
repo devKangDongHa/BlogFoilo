@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.project.Blog.model.BlogBigCategoryVO;
 import com.project.Blog.model.BlogBoardVO;
+import com.project.Blog.model.BlogGuestVO;
 import com.project.Blog.model.BlogSmallCategoryVO;
 import com.project.Blog.model.InterBlogDAO;
 
@@ -69,6 +70,24 @@ public class BlogService implements InterBlogService {
 	public HashMap<String, String> getBoardView(String viewno) {
 		HashMap<String, String> boardView = dao.getBoardView(viewno);
 		return boardView;
+	}
+
+	@Override
+	public int editGuest(HashMap<String, String> map) {
+		int n = dao.editGuest(map);
+		return n;
+	}
+
+	@Override
+	public BlogGuestVO getLoginGuest(String userid) {
+		BlogGuestVO loginguest = dao.getLoginGuest(userid);
+		return loginguest;
+	}
+
+	@Override
+	public HashMap<String, String> isExistUser(HashMap<String, String> map) {
+		HashMap<String, String> usermap = dao.isExistUser(map);
+		return usermap;
 	}
 
 }

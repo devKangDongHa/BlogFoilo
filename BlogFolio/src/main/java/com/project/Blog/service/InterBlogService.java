@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.project.Blog.model.BlogBigCategoryVO;
 import com.project.Blog.model.BlogBoardVO;
+import com.project.Blog.model.BlogGuestVO;
 import com.project.Blog.model.BlogSmallCategoryVO;
 
 public interface InterBlogService {
@@ -35,5 +36,14 @@ public interface InterBlogService {
 
 	// 글 보기
 	HashMap<String, String> getBoardView(String viewno);
+
+	// 랜덤 게스트 계정 생성
+	int editGuest(HashMap<String, String> map);
+
+	// 게스트 계정 가져오기
+	BlogGuestVO getLoginGuest(String userid);
+
+	// 로그인 검사
+	HashMap<String, String> isExistUser(HashMap<String, String> map);
 
 }

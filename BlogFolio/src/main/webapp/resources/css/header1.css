@@ -175,3 +175,34 @@ button:hover {
 #headerSearchInput:focus {
 	outline:none;
 }
+
+.toggleOn {
+	display: block;
+}
+
+#loginMenuContainer {
+	display: flex;
+	border: solid 1px #000000;
+	background-color: #ffffff;
+	font-size: 14pt;
+	width: 70px;
+	height: 50px;
+}
+
+#loginMenuContainer > ul {
+	padding: 0 0 0 20px;
+}
+
+#loginMenuContainer > ul > li:hover {
+	cursor: pointer;
+	text-decoration: underline;
+	font-weight: bold;
+}
+
+#image_ {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 10px;
+	height: 10px;
+}

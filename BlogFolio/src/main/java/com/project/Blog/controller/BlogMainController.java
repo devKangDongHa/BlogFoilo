@@ -1,24 +1,24 @@
 package com.project.Blog.controller;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.project.Blog.model.BlogBigCategoryVO;
 import com.project.Blog.model.BlogBoardVO;
+import com.project.Blog.model.BlogGuestVO;
 import com.project.Blog.model.BlogSmallCategoryVO;
 import com.project.Blog.service.InterBlogService;
-
-import oracle.sql.CLOB;
+import com.project.common.SHA256;
 
 @Controller
 public class BlogMainController {
@@ -105,5 +105,109 @@ public class BlogMainController {
 		
 		return mav;
 	}
+	
+	@RequestMapping(value="/Blog/loginGUEST")
+	public ModelAndView blogLoginGuest(HttpServletRequest request, ModelAndView mav) {
+		
+		String userid = "";
+		
+		String username = "GUEST";
+		
+		HashMap<String, String> map = new HashMap<String, String>();
+		
+		int idno;
+		
+		Random rd = new Random();
+		
+		idno = rd.nextInt((9900)+100);
+		
+		userid = "GUEST"+String.valueOf(idno);
+		
+		map.put("username", username);
+		map.put("userid", userid);
+		
+		int n = service.editGuest(map);
+		
+		HttpSession session = request.getSession();
+		
+		if(n==1) {
+			BlogGuestVO loginguest = service.getLoginGuest(userid);
+			
+			session.setAttribute("loginuser", loginguest);
+			
+			String msg = userid+"님 환영합니다.";
+			String loc = request.getContextPath()+"Blog.com";
+			
+			mav.addObject("msg", msg);
+			mav.addObject("loc",loc);
+			mav.setViewName("msg");
+		}
+		
+		return mav;
+	}
+	
+	@RequestMapping(value="/Blog/login", method= {RequestMethod.POST})
+	public ModelAndView blogLoginUser(HttpServletRequest request, ModelAndView mav) {
+		
+		String userid = request.getParameter("inputid");
+		String userpw = request.getParameter("inputpw");
+		
+		String loc="";
+		
+		if(userid != null && userpw != null) {
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("userid", userid);
+		map.put("userpw", SHA256.encrypt(userpw));
+		
+		HashMap<String, String> usermap = service.isExistUser(map);
 
+		
+		if(usermap == null) {
+			String msg = "아이디 혹은 비밀번호가 잘못되었습니다.";
+			loc = request.getContextPath()+"/Blog/Login.com";
+			mav.addObject("msg", msg);
+			mav.addObject("loc", loc);
+			mav.setViewName("msg2");
+			
+		} else {
+			
+			HttpSession session = request.getSession();
+			
+			session.setAttribute("loginuser", usermap);
+			
+			loc = request.getContextPath()+"Blog.com";
+			
+			mav.addObject("loc", loc);
+			mav.setViewName("msg");
+		}
+		
+		} else {
+			String msg = "\"아이디 혹은 비밀번호가 잘못되었습니다.";
+			loc = request.getContextPath()+"/Blog/Login.com";
+			mav.addObject("msg", msg);
+			mav.addObject("loc", loc);
+			mav.setViewName("msg2");
+		}
+		
+		
+		return mav;
+	}
+	
+	@RequestMapping(value="/Blog/logout")
+	public ModelAndView blogLogout(HttpServletRequest request, ModelAndView mav) {
+		
+		HttpSession session = request.getSession();
+		
+		session.invalidate();
+		
+		String msg = "로그아웃 되었습니다.";
+		String loc = request.getContextPath()+"/Blog.com";
+		
+		mav.addObject("msg", msg);
+		mav.addObject("loc", loc);
+		mav.setViewName("msg");
+		
+		return mav;
+	}
+	
 }

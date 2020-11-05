@@ -67,4 +67,22 @@ public class BlogDAO implements InterBlogDAO {
 		return boardView;
 	}
 
+	@Override
+	public int editGuest(HashMap<String, String> map) {
+		int n = sqlsession.insert("Blog.editGuest", map);
+		return n;
+	}
+
+	@Override
+	public BlogGuestVO getLoginGuest(String userid) {
+		BlogGuestVO loginguest = sqlsession.selectOne("Blog.getLoginGuest", userid);
+		return loginguest;
+	}
+
+	@Override
+	public HashMap<String, String> isExistUser(HashMap<String, String> map) {
+		HashMap<String, String> usermap = sqlsession.selectOne("Blog.isExistUser", map);
+		return usermap;
+	}
+
 }
