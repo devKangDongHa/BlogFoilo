@@ -46,7 +46,7 @@ public class BlogMainController {
 		String str_currentShowPageNo = request.getParameter("currentShowPageNo"); 
 		
 		int totalCount = 0;         // 총게시물 건수
-		int sizePerPage = 2;       // 한 페이지당 보여줄 게시물 수 
+		int sizePerPage = 5;       // 한 페이지당 보여줄 게시물 수 
 		int currentShowPageNo = 0;  // 현재 보여주는 페이지번호로서, 초기치로는 1페이지로 설정함.
 		int totalPage = 0;          // 총 페이지수(웹브라우저상에 보여줄 총 페이지 갯수, 페이지바) 
 		
@@ -143,7 +143,7 @@ public class BlogMainController {
 					url += "?"; 
 				
 				// *** [이전] 만들기 *** //    
-					pageBar += "<li class='prev'><a href='"+url+"currentShowPageNo="+(pageNo)+"&sizePerPage="+sizePerPage+"&searchWord="+searchWord+"'><<</a></li>";
+					pageBar += "<li class='prev'><a href='"+url+"currentShowPageNo=1&sizePerPage="+sizePerPage+"&searchWord="+searchWord+"'><<</a></li>";
 					pageBar += "<li class='prev prev1'><a href='"+url+"currentShowPageNo="+(currentShowPageNo-1)+"&sizePerPage="+sizePerPage+"&searchWord="+searchWord+"'><</a></li>";
 				while( !(loop>blockSize || pageNo>totalPage) ) {
 					
@@ -163,7 +163,7 @@ public class BlogMainController {
 				
 				// *** [다음] 만들기 *** //
 			
-				pageBar += "<li class='next'><a href='"+url+"currentShowPageNo="+pageNo+"&sizePerPage="+sizePerPage+"&searchWord="+searchWord+"'>>></a></li>"; 
+				pageBar += "<li class='next'><a href='"+url+"currentShowPageNo="+totalPage+"&sizePerPage="+sizePerPage+"&searchWord="+searchWord+"'>>></a></li>"; 
 				
 				
 				pageBar += "</ul>";
