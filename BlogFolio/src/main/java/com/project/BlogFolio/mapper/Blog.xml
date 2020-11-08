@@ -91,7 +91,7 @@
 	<select id="getTotalCountWithCategory" parameterType="HashMap" resultType="int">
 		SELECT COUNT(*)
 		FROM BLOGBOARD
-		WHERE CATEGORY_SNUMBER = #{categoryno}
+		WHERE CATEGORY_SNUMBER = #{categoryno} OR CATEGORY_NUMBER = #{categoryno}
 	</select>
 	
 	<select id="BlogBoardListWithPaging" parameterType="HashMap" resultType="com.project.Blog.model.BlogBoardVO">
@@ -107,7 +107,7 @@
 			    WHERE UPPER(TITLE) LIKE UPPER('%'||#{searchWord}||'%') OR UPPER(CONTENT) LIKE UPPER('%'||#{searchWord}||'%') OR UPPER(SUBCONTENT) LIKE UPPER('%'||#{searchWord}||'%')
 			 	</if>
 			 	<if test='categoryno != "" and "".equals(searchWord)'>
-			 	WHERE CATEGORY_SNUMBER = #{categoryno}
+			 	WHERE CATEGORY_SNUMBER = #{categoryno} OR CATEGORY_NUMBER = #{categoryno}
 			 	</if>
         		ORDER BY NUM DESC
     		) V

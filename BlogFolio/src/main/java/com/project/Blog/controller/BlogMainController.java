@@ -151,7 +151,7 @@ public class BlogMainController {
 						pageBar += "<li class='current'>"+pageNo+"</li>";
 					}
 					else {
-						pageBar += "<li class='nocurrent'><a href='"+url+"currentShowPageNo="+pageNo+"&sizePerPage="+sizePerPage+"&searchWord="+searchWord+"'>"+pageNo+"</a></li>"; 
+						pageBar += "<li class='nocurrent'><a href='"+url+"currentShowPageNo="+pageNo+"&sizePerPage="+sizePerPage+"&searchWord="+searchWord+"&category="+categoryno+"'>"+pageNo+"</a></li>"; 
 						       // ""+1+"&nbsp;"+2+"&nbsp;"+3+"&nbsp;"+......+10+"&nbsp;"
 					}
 					
