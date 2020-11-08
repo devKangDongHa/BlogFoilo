@@ -33,8 +33,7 @@
 #BlogContentList_View {
 	width: 100%;
 	height: 100%;
-	border-bottom: solid 1px #cccccc;
-	padding-bottom: 50px;
+	padding-bottom: 200px;
 	margin-bottom: 20px;
 }
 
@@ -114,32 +113,100 @@ li a:hover {
 	width: 100%;
 }
 
-#BackBtnArea {
-	text-align: right;
+#buttonArea {
+	text-align: left;
+	margin-bottom: 200px;
 }
 
-#BackBtn {
-	float: right;
+#goodArea {
+	float: left;
 	width: 100px;
-	height: 40px;
-	text-align: center;
-	margin: 0 auto;
-	font-size: 18pt;
-	padding-top: 7px;
-	background-color: #e6e600;
-	font-family: 'Jua', sans-serif;
-	border-radius: 5px;
-}
-
-#MainBtn {
-	float: right;
-	width: 100px;
-	height: 40px;
+	height: 20px;
 	text-align: center;
 	margin-right: 30px;
-	font-size: 18pt;
-	padding-top: 7px;
-	background-color: #e6e600;
-	font-family: 'Jua', sans-serif;
-	border-radius: 5px;
+	font-size: 0.8em;
+	padding-top: 5px;
+	padding-bottom: 3px;
+	border: solid 1px #bbbbbb;
+}
+
+#commentArea {
+	float: left;
+	width: 100px;
+	height: 20px;
+	text-align: center;
+	font-size: 0.8em;
+	padding-top: 5px;
+	padding-bottom: 3px;
+	border: solid 1px #bbbbbb;
+}
+
+#cateListmenu {
+	font-size: 0.67em;
+	font-weight: bold;
+	height: 20px;
+}
+
+#thisListArea {
+	float: left;
+}
+
+#categoryname {
+	color: #4da6ff !important;
+} 
+
+#categoryname:hover {
+	font-weight: bold;
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+#allListArea {
+	float: right;
+	margin-right: 10px;
+}
+
+#allListArea > a:hover {
+	text-decoration: underline;
+}
+
+#cateListArea {
+	border-bottom: solid 1px #000000;
+	border-top: solid 1px #000000;
+}
+
+#cateListTBL {
+	border-collapse: collapse;
+	margin: 0;
+	width: 100%;
+	font-size: 10pt;
+}
+
+.cateListTitle {
+	width: 80%;
+	color: #555555;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+#cateListTBD > tr:not(:last-child){
+	border-bottom: 1px solid #cccccc;
+}
+
+.cateListDate {
+	text-align: right;
+	padding-right: 10px;
+	color: #999999;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+#cateListTBD > tr:hover {
+	background-color: #eeeeee;
+}
+
+.cateListTitle:hover {
+	font-weight: bold;
+	cursor: pointer;
+	text-decoration: underline;
 }

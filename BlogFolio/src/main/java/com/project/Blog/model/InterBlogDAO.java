@@ -38,4 +38,7 @@ public interface InterBlogDAO {
 	// 페이징 게시글 목록
 	List<BlogBoardVO> BlogBoardListWithPaging(HashMap<String, String> paraMap);
 
+	// 카테고리 최신 글 목록
+	List<BlogBoardVO> getCateRecentList(String categoryno);
+
 }

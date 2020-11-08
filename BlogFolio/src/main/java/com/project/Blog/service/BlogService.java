@@ -84,4 +84,10 @@ public class BlogService implements InterBlogService {
 		return n;
 	}
 
+	@Override
+	public List<BlogBoardVO> getCateRecentList(String categoryno) {
+		List<BlogBoardVO> cateRecentList = dao.getCateRecentList(categoryno);
+		return cateRecentList;
+	}
+
 }

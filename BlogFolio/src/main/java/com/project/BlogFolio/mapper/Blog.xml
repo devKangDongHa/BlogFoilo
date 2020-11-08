@@ -122,4 +122,16 @@
 		WHERE RNO BETWEEN #{startRno} AND #{endRno}
 	</select>
 	
+	<select id="getCateRecentList" parameterType="String" resultType="com.project.Blog.model.BlogBoardVO">
+		SELECT ROWNUM AS RNO, NUM, TITLE, WRITEDAY
+        FROM
+        (
+            SELECT NUM, TITLE, WRITEDAY
+            FROM BLOGBOARD
+            WHERE CATEGORY_SNUMBER = #{categoryno}
+            ORDER BY NUM DESC
+        )V
+        WHERE ROWNUM BETWEEN 1 AND 5
+	</select>
+	
 </mapper>

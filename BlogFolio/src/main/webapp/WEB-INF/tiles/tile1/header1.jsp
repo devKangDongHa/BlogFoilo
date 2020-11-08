@@ -10,12 +10,6 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery-3.2.0.min.js" ></script>
 <script type="text/javascript">
 	
-function goSearch(){
-	var frm = document.searchFrm;
-	frm.method="GET";
-	frm.action="<%=ctxPath%>/Blog.com";
-	frm.submit();
-}
 
 function loginPopUp(){
 	window.open("<%=ctxPath%>/Blog/Login.com", "로그인", "width=500, height=500, left=700, top=300");
@@ -31,9 +25,21 @@ $(function(){
 		
 	});
 	
+	$("#searchWord").keydown(function(key) {
+        if (key.keyCode == 13) {
+        	goSearch();
+        }
+    });
 	
 });
 	
+	function goSearch(){
+		var frm = document.searchFrm;
+		frm.method="GET";
+		frm.action="<%=ctxPath%>/Blog.com";
+		frm.submit();
+	}
+
 	function logout(){
 		location.href = "<%=ctxPath%>/Blog/logout.com";
 	}

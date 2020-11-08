@@ -205,6 +205,10 @@ public class BlogMainController {
 		
 		boardView.put("categoryname", categoryname);
 		
+		List<BlogBoardVO> cateRecentList = service.getCateRecentList(categoryno);
+		
+		mav.addObject("cateRecentList", cateRecentList);
+		
 		mav.addObject("url", url);
 		
 		mav.addObject("bigcategoryList", bigcategoryList);

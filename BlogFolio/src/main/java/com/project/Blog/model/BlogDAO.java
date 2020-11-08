@@ -79,4 +79,10 @@ public class BlogDAO implements InterBlogDAO {
 		return blogboardList;
 	}
 
+	@Override
+	public List<BlogBoardVO> getCateRecentList(String categoryno) {
+		List<BlogBoardVO> cateRecentList = sqlsession.selectList("Blog.getCateRecentList", categoryno);
+		return cateRecentList;
+	}
+
 }

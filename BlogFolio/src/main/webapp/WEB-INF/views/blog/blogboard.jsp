@@ -32,6 +32,22 @@
 			
 		});
 		
+		$(".goView").click(function(){
+			
+			var no = $(this).children().children().val();
+			
+			location.href = "<%=ctxPath%>/Blog/Board.com?no="+no;
+			
+		});
+		
+		$(".categorynum_View").each(function(){
+			
+			if($(this).val() == 301 ) {
+				$(this).parent().parent().parent().css('display','none');
+			}
+			
+		});
+		
 	});
 	
 </script>
@@ -61,13 +77,38 @@
 					</div>
 				</div>
 				
-				<div id="BackBtnArea">
-					<div id="BackBtn">
-						<a href="${url }">목 록</a>
+				<div id="buttonArea">
+					<div id="goodArea">
+						<a>좋아요</a>
 					</div>
-					<div id="MainBtn">
-						<a href="<%=ctxPath %>/Blog.com">전체 글</a>
+					<div id="commentArea">
+						<a>댓글</a>
 					</div>
+				</div>
+				
+				<div id="cateList">
+					<div id="cateListmenu">
+						<div id="thisListArea">
+							<a id="categoryname">${boardView.categoryname }</a><a class="thisList"> 카테고리의 최신 글</a>
+						</div>
+						<div id="allListArea">
+							<a class="allList" href="<%=ctxPath%>/Blog.com">전체 글</a>
+						</div>
+					</div>
+					
+					<div id="cateListArea">
+						<table id="cateListTBL">
+							<tbody id="cateListTBD">
+							<c:forEach var="cateRecentListVO" items="${cateRecentList }">
+							<tr>
+									<td class="cateListTitle goView"><a>${cateRecentListVO.title }<input type="hidden" name="no" id="no" value="${cateRecentListVO.num}" /></a></td>
+									<td class="cateListDate"><span>${cateRecentListVO.writeday }</span></td>
+							</tr>
+							</c:forEach>
+							</tbody>
+						</table>
+					</div>
+					
 				</div>
 
 			</div>
