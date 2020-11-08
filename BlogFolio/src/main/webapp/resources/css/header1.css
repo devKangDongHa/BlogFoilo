@@ -161,7 +161,7 @@ button:hover {
 	height: 100%;
 }
 
-#headerSearchInput {
+#searchWord {
 	padding: 15px 20px;
 	width: 700px;
 	height: 30px;
@@ -172,7 +172,7 @@ button:hover {
 	background-color: transparent !important;
 }
 
-#headerSearchInput:focus {
+#searchWord:focus {
 	outline:none;
 }
 

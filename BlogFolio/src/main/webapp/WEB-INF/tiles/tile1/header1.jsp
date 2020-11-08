@@ -93,7 +93,7 @@ $(function(){
    		<div id="headerSearch">
    			<form id="headerSearchForm" name="searchFrm">
    			    <i class="fa fa-search" style="font-size: 25px;"></i>
-   				<input id="headerSearchInput" name="headerSearchInput" type="text" placeholder="Search.." autocomplete="off" />
+   				<input id="searchWord" name="searchWord" type="text" placeholder="Search.." autocomplete="off" />
    			</form>
    		</div>
    		

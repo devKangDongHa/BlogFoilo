@@ -16,6 +16,10 @@
 	
 	$(function(){
 		
+		var prevurl = $(location).attr('href');
+		
+		$("#url").val(prevurl);
+		
 		$(".goCategory").click(function(){
 			
 			var categoryNo = $(this).children().first().val();
@@ -28,9 +32,18 @@
 			
 			var viewno = $(this).children().first().val();
 			
-			location.href = "<%=ctxPath%>/Blog/Board.com?no="+viewno;
+			$("#viewFrm").submit();
 			
 		});
+		
+		if(${currentShowPageNo} == 1){
+			$(".prev > a").prop('href', 'javascript:void(0)');
+		}
+		
+		
+		if(${currentShowPageNo} == ${lastPageNo}){
+			$(".next > a").prop('href', 'javascript:void(0)');
+		}
 		
 	});
 	
@@ -67,10 +80,15 @@
 							</td>
 							<td class="BlogHeadLine">
 								<a class="BlogContentTitle">${blogboardListVO.title }
-									<input type="hidden" class="viewno" value="${blogboardListVO.num}" />
-								</a><br><br>
+								</a>
+								<form name="viewFrm" id="viewFrm" action="<%=ctxPath%>/Blog/Board.com?no=${blogboardListVO.num }" method="POST" style="display: none;">
+									<input type="hidden" class="url" id="url" name="url" />
+								</form>
+								<br><br>
 								<span class="BlogCategory BlogCateDay">
-									<a class="goCategory" href="#">${blogboardListVO.category }</a>
+									<a class="goCategory">${blogboardListVO.category }
+										<input type="hidden" value="${blogboardListVO.category_snumber}" />
+									</a>
 								</span><span>/</span><span class="BlogWriteDay BlogCateDay">${blogboardListVO.writeday }</span><br><br><br>
 								<span class="BlogHeadContent">${blogboardListVO.subcontent }</span>
 							</td>
@@ -78,52 +96,7 @@
 					</c:forEach>
 					</c:if>
 					
-					<!-- // 검색 시 // -->
-					<c:if test="${not empty blogboardListSearch}">
-					<c:forEach var="blogboardListSearchVO" items="${blogboardListSearch }">
-						<tr class="BlogList">
-							<td class="BlogThumbNail">
-								<a class="BlogContentTitle">
-								<input type="hidden" class="viewno" value="${blogboardListSearchVO.num}" />
-								<img src="<%=ctxPath %>/resources/image/${blogboardListSearchVO.thumbnail}" width="100%" height="100%" alt="${blogboardListSearchVO.thumbnail }"/>
-								</a>
-							</td>
-							<td class="BlogHeadLine">
-								<a class="BlogContentTitle">${blogboardListSearchVO.title }
-									<input type="hidden" class="viewno" value="${blogboardListSearchVO.num}" />
-								</a><br><br>
-								<span class="BlogCategory BlogCateDay">
-									<a class="goCategory" href="#">${blogboardListSearchVO.category }</a>
-								</span><span>/</span><span class="BlogWriteDay BlogCateDay">${blogboardListSearchVO.writeday }</span><br><br><br>
-								<span class="BlogHeadContent">${blogboardListSearchVO.subcontent }</span>
-							</td>
-						</tr>
-					</c:forEach>
-					</c:if>
-					
-					<!-- // 카테고리 선택 시 // -->
-					<c:if test="${not empty blogboardListCategory}">
-					<c:forEach var="blogboardListCategoryVO" items="${blogboardListCategory }">
-						<tr class="BlogList">
-							<td class="BlogThumbNail">
-								<a class="BlogContentTitle">
-								<input type="hidden" class="viewno" value="${blogboardListCategoryVO.num}" />
-								<img src="<%=ctxPath %>/resources/image/${blogboardListCategoryVO.thumbnail}" width="100%" height="100%" alt="${blogboardListCategoryVO.thumbnail }"/>
-								</a>
-							</td>
-							<td class="BlogHeadLine">
-								<a class="BlogContentTitle">${blogboardListCategoryVO.title }
-									<input type="hidden" class="viewno" value="${blogboardListCategoryVO.num}" />
-								</a><br><br>
-								<span class="BlogCategory BlogCateDay">
-									<a class="goCategory" href="#">${blogboardListCategoryVO.category }</a>
-								</span><span>/</span><span class="BlogWriteDay BlogCateDay">${blogboardListCategoryVO.writeday }</span><br><br><br>
-								<span class="BlogHeadContent">${blogboardListCategoryVO.subcontent }</span>
-							</td>
-						</tr>
-					</c:forEach>
-					</c:if>
-					<c:if test="${empty blogboardListSearch and empty blogboardList and empty blogboardListCategory }">
+					<c:if test="${empty blogboardList}">
 						<tr class="BlogList">
 							<td>
 								<span>검색하신 내용이 없습니다.</span>
@@ -134,6 +107,10 @@
 				</table>
 			</div>
 		
+			<div id="paging" align="center">
+				${pageBar}
+			</div>
+	
 		</div>
 		
 		<div id="BlogRightContainer">
@@ -160,10 +137,6 @@
 			</ul>
 		</div>
 		
-	</div>
-
-	<div id="paging">
-		<span>1 2 3 4 5 ...</span>
 	</div>
 
 	</div>

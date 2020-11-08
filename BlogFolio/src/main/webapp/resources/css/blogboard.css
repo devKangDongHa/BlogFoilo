@@ -1,5 +1,7 @@
 @charset "UTF-8";
 
+@import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
+
 #BlogContainer_View {
 	width: 966px;
 	margin: 0 auto;
@@ -31,6 +33,9 @@
 #BlogContentList_View {
 	width: 100%;
 	height: 100%;
+	border-bottom: solid 1px #cccccc;
+	padding-bottom: 50px;
+	margin-bottom: 20px;
 }
 
 .cateTitle_View {
@@ -107,4 +112,34 @@ li a:hover {
 
 #BlogContentBody_View {
 	width: 100%;
+}
+
+#BackBtnArea {
+	text-align: right;
+}
+
+#BackBtn {
+	float: right;
+	width: 100px;
+	height: 40px;
+	text-align: center;
+	margin: 0 auto;
+	font-size: 18pt;
+	padding-top: 7px;
+	background-color: #e6e600;
+	font-family: 'Jua', sans-serif;
+	border-radius: 5px;
+}
+
+#MainBtn {
+	float: right;
+	width: 100px;
+	height: 40px;
+	text-align: center;
+	margin-right: 30px;
+	font-size: 18pt;
+	padding-top: 7px;
+	background-color: #e6e600;
+	font-family: 'Jua', sans-serif;
+	border-radius: 5px;
 }

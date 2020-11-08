@@ -31,38 +31,8 @@ public class BlogService implements InterBlogService {
 	}
 
 	@Override
-	public List<BlogBoardVO> getBlogBoardList() {
-		List<BlogBoardVO> blogboardList = dao.getBlogBoardList();
-		return blogboardList;
-	}
-
-	@Override
-	public List<BlogBoardVO> getBlogBoardListSearch(String searchWord) {
-		List<BlogBoardVO> blogboardListSearch = dao.getBlogBoardListSearch(searchWord);
-		return blogboardListSearch;
-	}
-
-	@Override
-	public List<BlogBoardVO> getBlogBoardListCategory(String categoryno) {
-		List<BlogBoardVO> blogboardListCategory = dao.getBlogBoardListCategory(categoryno);
-		return blogboardListCategory;
-	}
-
-/*	@Override
-	public List<BlogBoardVO> getBlogBoardListCategorySmall(String categoryno) {
-		List<BlogBoardVO> blogboardListCategory = dao.getBlogBoardListCategorySmall(categoryno);
-		return blogboardListCategory;
-	}*/
-
-	@Override
-	public String getCategoryNameBig(String categoryno) {
-		String categoryName = dao.getCategoryNameBig(categoryno);
-		return categoryName;
-	}
-
-	@Override
-	public String getCategoryNameSmall(String categoryno) {
-		String categoryName = dao.getCategoryNameSmall(categoryno);
+	public String getCategoryName(String categoryno) {
+		String categoryName = dao.getCategoryName(categoryno);
 		return categoryName;
 	}
 
@@ -88,6 +58,30 @@ public class BlogService implements InterBlogService {
 	public HashMap<String, String> isExistUser(HashMap<String, String> map) {
 		HashMap<String, String> usermap = dao.isExistUser(map);
 		return usermap;
+	}
+
+	@Override
+	public int getTotalCountWithNOsearch() {
+		int n = dao.getTotalCountWithNOsarch();
+		return n;
+	}
+
+	@Override
+	public int getTotalCountWithSearch(HashMap<String, String> paraMap) {
+		int n = dao.getTotalCountWithSearch(paraMap);
+		return n;
+	}
+
+	@Override
+	public List<BlogBoardVO> BlogBoardListWithPaging(HashMap<String, String> paraMap) {
+		List<BlogBoardVO> blogboardList = dao.BlogBoardListWithPaging(paraMap);
+		return blogboardList;
+	}
+
+	@Override
+	public int getTotalCountWithCategory(HashMap<String, String> paraMap) {
+		int n = dao.getTotalCountWithCategory(paraMap);
+		return n;
 	}
 
 }

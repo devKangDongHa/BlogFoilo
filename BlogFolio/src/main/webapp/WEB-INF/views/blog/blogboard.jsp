@@ -24,6 +24,14 @@
 			
 		});
 		
+		$(".goCategory").click(function(){
+			
+			var categoryNo = $(this).children().first().val();
+
+			location.href = "<%=ctxPath%>/Blog.com?category="+categoryNo;
+			
+		});
+		
 	});
 	
 </script>
@@ -41,13 +49,24 @@
 					<div id="BlogContentHead_View">
 						<h1>${boardView.title }</h1>
 						<span class="BlogCategory BlogCateDay">
-							<a class="goCategory" href="#">카테고리</a>
+							<a class="goCategory" href="#">${boardView.categoryname}
+								<input type="hidden" value="${boardView.category_snumber}" />
+							</a>
 							</span><span>/</span><span class="BlogWriteDay BlogCateDay">${boardView.writeday }</span>
 					</div>
 					<div id="BlogContentBody_View">
 						<div id="Content_View">
 							${boardView.content }
 						</div>
+					</div>
+				</div>
+				
+				<div id="BackBtnArea">
+					<div id="BackBtn">
+						<a href="${url }">목 록</a>
+					</div>
+					<div id="MainBtn">
+						<a href="<%=ctxPath %>/Blog.com">전체 글</a>
 					</div>
 				</div>
 

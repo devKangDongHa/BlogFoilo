@@ -11,23 +11,8 @@ public interface InterBlogDAO {
 	// 소분류 카테고리
 	List<BlogSmallCategoryVO> getSmallCategoryList();
 
-	// 블로그 글 목록
-	List<BlogBoardVO> getBlogBoardList();
-	
-	// 전체 글 검색
-	List<BlogBoardVO> getBlogBoardListSearch(String SearchWord);
-
-	// 카테고리 대분류 검색
-	List<BlogBoardVO> getBlogBoardListCategory(String categoryno);
-/*
-	// 카테고리 소분류 검색
-	List<BlogBoardVO> getBlogBoardListCategorySmall(String categoryno);*/
-
-	// 카테고리 대분류일 때 이름
-	String getCategoryNameBig(String categoryno);
-
-	// 카테고리 소분류일 때 이름
-	String getCategoryNameSmall(String categoryno);
+	// 카테고리 이름
+	String getCategoryName(String categoryno);
 
 	// 글 보기
 	HashMap<String, String> getBoardView(String viewno);
@@ -40,5 +25,17 @@ public interface InterBlogDAO {
 
 	// 로그인 검사
 	HashMap<String, String> isExistUser(HashMap<String, String> map);
+
+	// 검색 조건, 카테고리 없을 때 게시글 수
+	int getTotalCountWithNOsarch();
+
+	// 검색 조건 있을 때 게시글 수
+	int getTotalCountWithSearch(HashMap<String, String> paraMap);
+	
+	// 카테고리 있을 때 게시글 수
+	int getTotalCountWithCategory(HashMap<String, String> paraMap);
+	
+	// 페이징 게시글 목록
+	List<BlogBoardVO> BlogBoardListWithPaging(HashMap<String, String> paraMap);
 
 }

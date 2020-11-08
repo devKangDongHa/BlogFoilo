@@ -30,40 +30,7 @@
 		ORDER BY C.CATEGORY_NUMBER, C.CATEGORY_SNUMBER
 	</select>
 	
-	<select id="getBlogBoardList" resultType="com.project.Blog.model.BlogBoardVO">
-		SELECT NUM, THUMBNAIL, TITLE, CONTENT, TO_CHAR(WRITEDAY, 'YYYY.MM.DD') AS WRITEDAY, CATEGORY_NUMBER, CATEGORY_SNUMBER, VIEWCOUNT, SUBCONTENT
-		FROM BLOGBOARD
-		ORDER BY NUM DESC
-	</select>
-	
-	<select id="getBlogBoardListSearch" resultType="com.project.Blog.model.BlogBoardVO" parameterType="String">
-		SELECT NUM, THUMBNAIL, TITLE, CONTENT, TO_CHAR(WRITEDAY, 'YYYY.MM.DD') AS WRITEDAY, CATEGORY_NUMBER, CATEGORY_SNUMBER, VIEWCOUNT, SUBCONTENT
-		FROM BLOGBOARD
-		WHERE UPPER(TITLE) LIKE UPPER('%'||#{searchWord}||'%') OR UPPER(CONTENT) LIKE UPPER('%'||#{searchWord}||'%') OR UPPER(SUBCONTENT) LIKE UPPER('%'||#{searchWord}||'%')
-		ORDER BY NUM DESC
-	</select>
-	
-	<select id="getBlogBoardListCategory" resultType="com.project.Blog.model.BlogBoardVO" parameterType="String">
-		SELECT NUM, THUMBNAIL, TITLE, CONTENT, TO_CHAR(WRITEDAY, 'YYYY.MM.DD') AS WRITEDAY, CATEGORY_NUMBER, CATEGORY_SNUMBER, VIEWCOUNT, SUBCONTENT
-		FROM BLOGBOARD
-		WHERE CATEGORY_NUMBER = #{categoryno} OR CATEGORY_SNUMBER = #{categoryno}
-		ORDER BY NUM DESC
-	</select>
-	
-<!-- 	<select id="getBlogBoardListCategorySmall" parameterType="String">
-		SELECT NUM, THUMBNAIL, TITLE, CONTENT, TO_CHAR(WRITEDAY, 'YYYY.MM.DD') AS WRITEDAY, CATEGORY_NUMBER, CATEGORY_SNUMBER, VIEWCOUNT, SUBCONTENT
-		FROM BLOGBOARD
-		WHERE CATEGORY_SNUMBER = #{categoryno}
-		ORDER BY NUM DESC
-	</select> -->
-	
-	<select id="getCategoryNameBig" resultType="String" parameterType="String">
-		SELECT CATEGORY_NAME
-		FROM BLOGCATEGORY_BIG
-		WHERE CATEGORY_NUMBER = #{categoryno}
-	</select>
-
-	<select id="getCategoryNameSmall" resultType="String" parameterType="String">
+	<select id="getCategoryName" resultType="String" parameterType="String">
 		SELECT CATEGORY_NAME
 		FROM BLOGCATEGORY_SMALL
 		WHERE CATEGORY_SNUMBER = #{categoryno}
@@ -108,6 +75,44 @@
 		SELECT USERNO, USERID, USERNAME
 		FROM BLOGUSER
 		WHERE USERID = #{userid} AND USERPW = #{userpw}
+	</select>
+	
+	<select id="getTotalCountWithNOsearch" resultType="int">
+		SELECT COUNT(*)
+		FROM BLOGBOARD
+	</select>
+	
+	<select id="getTotalCountWithSearch" parameterType="HashMap" resultType="int">
+		SELECT COUNT(*)
+		FROM BLOGBOARD
+		WHERE UPPER(TITLE) LIKE UPPER('%'||#{searchWord}||'%') OR UPPER(CONTENT) LIKE UPPER('%'||#{searchWord}||'%') OR UPPER(SUBCONTENT) LIKE UPPER('%'||#{searchWord}||'%')
+	</select>
+	
+	<select id="getTotalCountWithCategory" parameterType="HashMap" resultType="int">
+		SELECT COUNT(*)
+		FROM BLOGBOARD
+		WHERE CATEGORY_SNUMBER = #{categoryno}
+	</select>
+	
+	<select id="BlogBoardListWithPaging" parameterType="HashMap" resultType="com.project.Blog.model.BlogBoardVO">
+		SELECT RNO, NUM, THUMBNAIL, TITLE, CONTENT, WRITEDAY, CATEGORY_NUMBER, CATEGORY_SNUMBER, VIEWCOUNT, SUBCONTENT
+		FROM
+		(
+   			SELECT ROWNUM AS RNO, NUM, THUMBNAIL, TITLE, CONTENT, WRITEDAY, CATEGORY_NUMBER, CATEGORY_SNUMBER, VIEWCOUNT, SUBCONTENT
+   			FROM
+    		(
+        		SELECT NUM, THUMBNAIL, TITLE, CONTENT, TO_CHAR(WRITEDAY, 'YYYY.MM.DD') AS WRITEDAY, CATEGORY_NUMBER, CATEGORY_SNUMBER, VIEWCOUNT, SUBCONTENT
+        		FROM BLOGBOARD
+        		<if test='searchWord != "" and "".equals(categoryno)'>
+			    WHERE UPPER(TITLE) LIKE UPPER('%'||#{searchWord}||'%') OR UPPER(CONTENT) LIKE UPPER('%'||#{searchWord}||'%') OR UPPER(SUBCONTENT) LIKE UPPER('%'||#{searchWord}||'%')
+			 	</if>
+			 	<if test='categoryno != "" and "".equals(searchWord)'>
+			 	WHERE CATEGORY_SNUMBER = #{categoryno}
+			 	</if>
+        		ORDER BY NUM DESC
+    		) V
+		) T
+		WHERE RNO BETWEEN #{startRno} AND #{endRno}
 	</select>
 	
 </mapper>

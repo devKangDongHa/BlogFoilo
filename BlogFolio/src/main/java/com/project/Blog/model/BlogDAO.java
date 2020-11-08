@@ -26,38 +26,8 @@ public class BlogDAO implements InterBlogDAO {
 	}
 
 	@Override
-	public List<BlogBoardVO> getBlogBoardList() {
-		List<BlogBoardVO> blogboardList = sqlsession.selectList("Blog.getBlogBoardList");
-		return blogboardList;
-	}
-
-	@Override
-	public List<BlogBoardVO> getBlogBoardListSearch(String searchWord) {
-		List<BlogBoardVO> blogboardListSearch = sqlsession.selectList("Blog.getBlogBoardListSearch", searchWord);
-		return blogboardListSearch;
-	}
-
-	@Override
-	public List<BlogBoardVO> getBlogBoardListCategory(String categoryno) {
-		List<BlogBoardVO> blogboardListCategory = sqlsession.selectList("Blog.getBlogBoardListCategory", categoryno);
-		return blogboardListCategory;
-	}
-/*
-	@Override
-	public List<BlogBoardVO> getBlogBoardListCategorySmall(String categoryno) {
-		List<BlogBoardVO> blogboardListCategory = sqlsession.selectList("Blog.getBlogBoardListCategorySmall", categoryno);
-		return blogboardListCategory;
-	}*/
-
-	@Override
-	public String getCategoryNameBig(String categoryno) {
-		String categoryName = sqlsession.selectOne("Blog.getCategoryNameBig", categoryno);
-		return categoryName;
-	}
-
-	@Override
-	public String getCategoryNameSmall(String categoryno) {
-		String categoryName = sqlsession.selectOne("Blog.getCategoryNameSmall", categoryno);
+	public String getCategoryName(String categoryno) {
+		String categoryName = sqlsession.selectOne("Blog.getCategoryName", categoryno);
 		return categoryName;
 	}
 
@@ -83,6 +53,30 @@ public class BlogDAO implements InterBlogDAO {
 	public HashMap<String, String> isExistUser(HashMap<String, String> map) {
 		HashMap<String, String> usermap = sqlsession.selectOne("Blog.isExistUser", map);
 		return usermap;
+	}
+
+	@Override
+	public int getTotalCountWithNOsarch() {
+		int n = sqlsession.selectOne("Blog.getTotalCountWithNOsearch");
+		return n;
+	}
+
+	@Override
+	public int getTotalCountWithSearch(HashMap<String, String> paraMap) {
+		int n = sqlsession.selectOne("Blog.getTotalCountWithSearch", paraMap);
+		return n;
+	}
+
+	@Override
+	public int getTotalCountWithCategory(HashMap<String, String> paraMap) {
+		int n = sqlsession.selectOne("Blog.getTotalCountWithCategory", paraMap);
+		return n;
+	}
+
+	@Override
+	public List<BlogBoardVO> BlogBoardListWithPaging(HashMap<String, String> paraMap) {
+		List<BlogBoardVO> blogboardList = sqlsession.selectList("Blog.BlogBoardListWithPaging", paraMap);
+		return blogboardList;
 	}
 
 }

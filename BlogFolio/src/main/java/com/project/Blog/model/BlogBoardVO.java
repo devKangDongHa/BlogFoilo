@@ -112,7 +112,7 @@ public class BlogBoardVO {
 			case "207":
 				category = "일상";
 				break;
-			case "3":
+			case "301":
 				category = "기타";
 			}
 			

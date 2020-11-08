@@ -21,7 +21,7 @@
 #BlogMainContainer {
 	width: 100%;
 	overflow: hidden;
-	height: 100%;
+	height: auto;
 
 }
 
@@ -33,6 +33,7 @@
 #BlogContentList {
 	width: 100%;
 	height: 100%;
+	margin-bottom: 100px;
 }
 
 #BlogRightContainer {
@@ -97,6 +98,7 @@
 
 .goCategory:hover {
 	text-decoration: underline;
+	cursor: pointer;
 }
 
 /* // 카테고리 박스 // */
@@ -149,4 +151,38 @@ li a:hover {
 	font-weight: normal !important;
 	font-size: 12pt !important;
 	color: #bbbbbb;
+}
+
+#paging {
+	margin: 0 auto;
+	width: 50%;
+}
+
+#paging > ul {
+	margin: 0 auto;
+	list-style-type: none;
+}
+
+#paging > ul > li {
+	display: inline-block; 
+	width: 30px;
+	font-size: 16pt;
+	text-align: center;
+}
+
+.current {
+	font-weight: bold;
+	padding: 2px 4px;
+}
+
+.nocurrent > a{
+	color: #aaaaaa;
+}
+
+.next, .prev {
+	font-size: 18pt;
+}
+
+.next a, .prev a {
+	color: #aaaaaa;
 }
