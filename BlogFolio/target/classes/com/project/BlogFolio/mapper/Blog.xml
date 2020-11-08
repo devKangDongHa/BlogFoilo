@@ -31,9 +31,16 @@
 	</select>
 	
 	<select id="getCategoryName" resultType="String" parameterType="String">
-		SELECT CATEGORY_NAME
-		FROM BLOGCATEGORY_SMALL
-		WHERE CATEGORY_SNUMBER = #{categoryno}
+        SELECT CATEGORY_NAME
+        FROM
+        (
+        SELECT CATEGORY_NAME, CATEGORY_NUMBER
+        FROM BLOGCATEGORY_BIG
+        UNION
+        SELECT CATEGORY_NAME, CATEGORY_SNUMBER
+        FROM BLOGCATEGORY_SMALL
+        ) V
+        WHERE CATEGORY_NUMBER = #{categoryno}
 	</select>
 	
 	<resultMap type="HashMap" id="boardMap">

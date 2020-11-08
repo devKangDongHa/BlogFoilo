@@ -16,6 +16,18 @@
 	
 	$(function(){
 		
+		var currentShowPageNo = "${currentShowPageNo}";
+		var lastPageNo = "${lastPageNo}";
+		
+		if(currentShowPageNo == 1){
+			$(".prev > a").prop('href', 'javascript:void(0)');
+		}
+		
+		
+		if(currentShowPageNo == lastPageNo){
+			$(".next > a").prop('href', 'javascript:void(0)');
+		}
+		
 		var prevurl = $(location).attr('href');
 		
 		$("#url").val(prevurl);
@@ -36,14 +48,13 @@
 			
 		});
 		
-		if(${currentShowPageNo} == 1){
-			$(".prev > a").prop('href', 'javascript:void(0)');
-		}
-		
-		
-		if(${currentShowPageNo} == ${lastPageNo}){
-			$(".next > a").prop('href', 'javascript:void(0)');
-		}
+		$(".categorynum").each(function(){
+			
+			if($(this).val() == 301 ) {
+				$(this).parent().parent().parent().css('display','none');
+			}
+			
+		});
 		
 	});
 	

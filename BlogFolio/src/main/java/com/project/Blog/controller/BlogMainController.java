@@ -143,8 +143,8 @@ public class BlogMainController {
 					url += "?"; 
 				
 				// *** [이전] 만들기 *** //    
-					pageBar += "<li class='prev'><a href='"+url+"currentShowPageNo=1&sizePerPage="+sizePerPage+"&searchWord="+searchWord+"'><<</a></li>";
-					pageBar += "<li class='prev prev1'><a href='"+url+"currentShowPageNo="+(currentShowPageNo-1)+"&sizePerPage="+sizePerPage+"&searchWord="+searchWord+"'><</a></li>";
+					pageBar += "<li class='prev'><a href='"+url+"currentShowPageNo=1&sizePerPage="+sizePerPage+"&searchWord="+searchWord+"&category="+categoryno+"'><<</a></li>";
+					pageBar += "<li class='prev prev1'><a href='"+url+"currentShowPageNo="+(currentShowPageNo-1)+"&sizePerPage="+sizePerPage+"&searchWord="+searchWord+"&category="+categoryno+"'><</a></li>";
 				while( !(loop>blockSize || pageNo>totalPage) ) {
 					
 					if(pageNo == currentShowPageNo) {
@@ -159,11 +159,11 @@ public class BlogMainController {
 					pageNo++;
 				}// end of while---------------------------------
 				
-				pageBar += "<li class='next next1'><a href='"+url+"currentShowPageNo="+(currentShowPageNo+1)+"&sizePerPage="+sizePerPage+"&searchWord="+searchWord+"'>></a></li>";
+				pageBar += "<li class='next next1'><a href='"+url+"currentShowPageNo="+(currentShowPageNo+1)+"&sizePerPage="+sizePerPage+"&searchWord="+searchWord+"&category="+categoryno+"'>></a></li>";
 				
 				// *** [다음] 만들기 *** //
 			
-				pageBar += "<li class='next'><a href='"+url+"currentShowPageNo="+totalPage+"&sizePerPage="+sizePerPage+"&searchWord="+searchWord+"'>>></a></li>"; 
+				pageBar += "<li class='next'><a href='"+url+"currentShowPageNo="+totalPage+"&sizePerPage="+sizePerPage+"&searchWord="+searchWord+"&category="+categoryno+"'>>></a></li>"; 
 				
 				
 				pageBar += "</ul>";
