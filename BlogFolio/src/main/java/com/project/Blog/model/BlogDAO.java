@@ -85,4 +85,17 @@ public class BlogDAO implements InterBlogDAO {
 		return cateRecentList;
 	}
 
+	@Override
+	public int writeEnd(BoardVO boardvo) {
+		int n = sqlsession.insert("Blog.writeEnd", boardvo);
+		return n;
+	}
+
+	@Override
+	public int writeEnd_withFile(BoardVO boardvo) {
+		int n = sqlsession.insert("Blog.writeEnd_withFile", boardvo);
+		return n;
+	}
+
+
 }

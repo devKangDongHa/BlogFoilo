@@ -134,4 +134,14 @@
         WHERE ROWNUM BETWEEN 1 AND 5
 	</select>
 	
+	<insert id="writeEnd" parameterType="com.project.Blog.model.BoardVO">
+		INSERT INTO BLOGBOARD(NUM, TITLE, CONTENT, CATEGORY_NUMBER, CATEGORY_SNUMBER, SUBCONTENT)
+		VALUES(SEQ_BLOGBOARD.NEXTVAL, #{title}, #{content}, #{category_number}, #{category_snumber}, #{subcontent})
+	</insert>
+	
+	<insert id="writeEnd_withFile" parameterType="com.project.Blog.model.BoardVO">
+		INSERT INTO BLOGBOARD(NUM, THUMBNAIL, TITLE, CONTENT, CATEGORY_NUMBER, CATEGORY_SNUMBER, SUBCONTENT, ORGFILENAME, FILESIZE)
+		VALUES(SEQ_BLOGBOARD.NEXTVAL, #{thumbnail}, #{title}, #{content}, #{category_number}, #{category_snumber}, #{subcontent}, #{orgFilename}, #{fileSize}) 
+	</insert>
+	
 </mapper>

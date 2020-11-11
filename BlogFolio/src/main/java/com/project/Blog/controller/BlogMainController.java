@@ -1,5 +1,7 @@
 package com.project.Blog.controller;
 
+import java.io.File;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
@@ -11,13 +13,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.project.Blog.model.BlogBigCategoryVO;
 import com.project.Blog.model.BlogBoardVO;
 import com.project.Blog.model.BlogGuestVO;
 import com.project.Blog.model.BlogSmallCategoryVO;
+import com.project.Blog.model.BoardVO;
 import com.project.Blog.service.InterBlogService;
+import com.project.common.FileManager;
+import com.project.common.MyUtil;
 import com.project.common.SHA256;
 
 @Controller
@@ -25,6 +32,9 @@ public class BlogMainController {
 	
 	@Autowired
 	private InterBlogService service;
+	
+	@Autowired
+	private FileManager fileManager;
 	
 	@RequestMapping(value="/Blog")
 	public ModelAndView BlogMain(HttpServletRequest request, ModelAndView mav) {
@@ -330,6 +340,116 @@ public class BlogMainController {
 		mav.setViewName("msg");
 		
 		return mav;
+	}
+	
+	@RequestMapping(value="/Blog/Write")
+	public ModelAndView BlogWrite(HttpServletRequest request, ModelAndView mav) {
+		
+		HttpSession session = request.getSession();
+		
+		@SuppressWarnings("unchecked")	// 경고 무시 선언
+		HashMap<String, String> usermap = (HashMap<String, String>) session.getAttribute("loginuser");
+		
+		if(usermap == null) {
+			String msg = "비정상적인 접근입니다.";
+			String loc = request.getContextPath()+"/Blog.com";
+			
+			mav.addObject("msg", msg);
+			mav.addObject("loc", loc);
+			
+			mav.setViewName("msg2");
+		} else {
+		
+		List<BlogBigCategoryVO> bigcategoryList = service.getBigCategoryList();
+		
+		List<BlogSmallCategoryVO> smallcategoryList = service.getSmallCategoryList();
+		
+		mav.addObject("bigcategoryList", bigcategoryList);
+		mav.addObject("smallcategoryList", smallcategoryList);
+		
+		mav.setViewName("blog/blogwrite.tiles1");
+		
+		}
+		
+		return mav;
+	}
+	
+	@RequestMapping(value="/Blog/WriteEnd")
+	public ModelAndView BlogWriteEnd(BoardVO boardvo, ModelAndView mav, MultipartHttpServletRequest mrequest) {
+		
+		MultipartFile writethumbnail = boardvo.getWritethumbnail();
+		
+		if(!writethumbnail.isEmpty()) {
+			HttpSession session = mrequest.getSession();
+ 		 	String root = session.getServletContext().getRealPath("/");
+ 		 	String path = root + "resources" + File.separator + "files";
+ 		 	String path2 = "C:\\Git\\BlogFoilo\\BlogFolio\\src\\main\\webapp\\resources\\image";
+ 		 	String newFileName = "";
+ 		 	
+ 		 	byte[] bytes = null;
+ 		 	
+ 		 	long fileSize = 0;
+ 		 	
+ 		 try {
+ 			 
+ 		 	bytes = writethumbnail.getBytes();
+ 		 	
+ 		 	newFileName = fileManager.doFileUpload(bytes, writethumbnail.getOriginalFilename(), path2);
+ 		 	
+ 		 	/*boardvo.setThumbnail(newFileName);*/
+ 		 	boardvo.setThumbnail(newFileName);
+ 		 	
+ 		 	/*boardvo.setOrgFilename(writethumbnail.getOriginalFilename());*/
+ 		 	boardvo.setOrgFilename(writethumbnail.getOriginalFilename());
+ 		 	
+ 		 	fileSize = writethumbnail.getSize();
+			
+ 		 	boardvo.setFileSize(String.valueOf(fileSize));
+ 		 	
+			} catch(Exception e) {
+				e.printStackTrace();
+			}	
+		
+		}
+		
+		   boardvo.setTitle(MyUtil.replaceParameter(boardvo.getTitle()));
+	 	   boardvo.setContent(MyUtil.replaceParameter(boardvo.getContent()));
+	 	   boardvo.setContent(boardvo.getContent().replaceAll("\r\n", "<br/>"));
+	 	   
+	 	  int n = 0;
+	 		if(writethumbnail.isEmpty()) {
+	 			// 첨부파일이 없는 경우이라면
+	 			n = service.writeEnd(boardvo); 
+	 		}
+	 		else {
+	 			// 첨부파일이 있는 경우이라면
+	 			n = service.writeEnd_withFile(boardvo);
+	 		}
+	 		
+	 		String msg = "";
+	 		String loc = "";
+	 		
+	 		if(n>0) {
+	 			msg = "작성 완료";
+	 			loc = mrequest.getContextPath()+"/Blog.com";
+	 		} else {
+	 			msg = "작성 실패";
+	 			loc = "javascript:history.back()";
+	 		}
+	 		
+	 		
+	 		
+	 		mav.addObject("msg", msg);
+	 		mav.addObject("loc", loc);
+	 		
+	 		mav.setViewName("msg2");
+		
+		return mav;
+	}
+
+	private File File(String string) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

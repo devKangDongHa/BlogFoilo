@@ -15,7 +15,7 @@
 <script type="text/javascript">
 	
 	$(function(){
-		
+		 
 		var currentShowPageNo = "${currentShowPageNo}";
 		var lastPageNo = "${lastPageNo}";
 		
@@ -86,7 +86,7 @@
 							<td class="BlogThumbNail">
 								<a class="BlogContentTitle">
 								<input type="hidden" class="viewno" value="${blogboardListVO.num}" />
-								<img src="<%=ctxPath %>/resources/image/${blogboardListVO.thumbnail}" width="100%" height="100%" alt="${blogboardListVO.thumbnail }"/>
+								<img src="<%=ctxPath %>/resources/image/${blogboardListVO.thumbnail}" width="250px" height="250px" alt=""/>
 								</a>
 							</td>
 							<td class="BlogHeadLine">

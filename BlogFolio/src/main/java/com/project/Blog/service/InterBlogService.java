@@ -7,6 +7,7 @@ import com.project.Blog.model.BlogBigCategoryVO;
 import com.project.Blog.model.BlogBoardVO;
 import com.project.Blog.model.BlogGuestVO;
 import com.project.Blog.model.BlogSmallCategoryVO;
+import com.project.Blog.model.BoardVO;
 
 public interface InterBlogService {
 
@@ -45,5 +46,13 @@ public interface InterBlogService {
 
 	// 카테고리 최신 글 목록
 	List<BlogBoardVO> getCateRecentList(String categoryno);
+
+	// 첨부 파일 없는 글 작성
+	int writeEnd(BoardVO boardvo);
+
+	// 첨부 파일 있는 글 작성
+	int writeEnd_withFile(BoardVO boardvo);
+
+
 
 }

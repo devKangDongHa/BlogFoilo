@@ -63,7 +63,7 @@ $(function(){
 		   			<a>${sessionScope.loginuser.userid }</a><span>ㅣ</span>
 		   			<div id="loginMenuContainer">
 		 			<ul>
-		 				<li><a>write</a></li>
+		 				<li><a href="<%=ctxPath%>/Blog/Write.com">write</a></li>
 		 				<li><a onclick="logout();">logout</a></li>
 		 			</ul>
 		 			</div>
@@ -75,11 +75,6 @@ $(function(){
 		   		</ul>
    			</div>
    		</div>
- 
- 		<div id="image_">
- 			<img src="<%=ctxPath %>/resources/image/guideline.png" width="100%" height="100%" />
- 		</div>
- 		
  
    	<!-- // header 메인 메뉴 // -->
    		<div id="BlogHeadMainMenuArea">

@@ -41,4 +41,11 @@ public interface InterBlogDAO {
 	// 카테고리 최신 글 목록
 	List<BlogBoardVO> getCateRecentList(String categoryno);
 
+	// 첨부 파일 없는 글 작성
+	int writeEnd(BoardVO boardvo);
+
+	// 첨부 파일 있는 글 작성
+	int writeEnd_withFile(BoardVO boardvo);
+
+
 }

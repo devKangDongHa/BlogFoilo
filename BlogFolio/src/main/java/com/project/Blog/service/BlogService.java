@@ -10,6 +10,7 @@ import com.project.Blog.model.BlogBigCategoryVO;
 import com.project.Blog.model.BlogBoardVO;
 import com.project.Blog.model.BlogGuestVO;
 import com.project.Blog.model.BlogSmallCategoryVO;
+import com.project.Blog.model.BoardVO;
 import com.project.Blog.model.InterBlogDAO;
 
 @Service
@@ -89,5 +90,18 @@ public class BlogService implements InterBlogService {
 		List<BlogBoardVO> cateRecentList = dao.getCateRecentList(categoryno);
 		return cateRecentList;
 	}
+
+	@Override
+	public int writeEnd(BoardVO boardvo) {
+		int n = dao.writeEnd(boardvo);
+		return n;
+	}
+
+	@Override
+	public int writeEnd_withFile(BoardVO boardvo) {
+		int n = dao.writeEnd_withFile(boardvo);
+		return n;
+	}
+
 
 }
