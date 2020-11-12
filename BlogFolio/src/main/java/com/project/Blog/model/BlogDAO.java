@@ -97,5 +97,35 @@ public class BlogDAO implements InterBlogDAO {
 		return n;
 	}
 
+	@Override
+	public String getLike_count(String viewno) {
+		String like_count = sqlsession.selectOne("Blog.getLike_count", viewno);
+		return like_count;
+	}
+
+	@Override
+	public int DelWrite(String viewno) {
+		int n = sqlsession.delete("Blog.DelWrite", viewno);
+		return n;
+	}
+
+	@Override
+	public BoardVO getBoardDetail(String viewno) {
+		BoardVO boardview = sqlsession.selectOne("Blog.getBoardDetail", viewno);
+		return boardview;
+	}
+
+	@Override
+	public int EditEnd(BoardVO boardvo) {
+		int n = sqlsession.update("Blog.EditEnd", boardvo);
+		return n;
+	}
+
+	@Override
+	public int EidtEnd_withFile(BoardVO boardvo) {
+		int n = sqlsession.update("Blog.EditEnd_withFile", boardvo);
+		return n;
+	}
+
 
 }

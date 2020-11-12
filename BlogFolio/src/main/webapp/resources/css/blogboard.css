@@ -210,3 +210,21 @@ li a:hover {
 	cursor: pointer;
 	text-decoration: underline;
 }
+
+#editDelArea {
+	width: 100%;
+	height: 30px;
+}
+
+#editDelArea > div {
+	float: right;
+	display: inline-block;
+	margin-right: 20px;
+	font-size: 0.8em;
+}
+
+#editDelArea > div:hover {
+	text-decoration: underline;
+	cursor: pointer;
+	font-weight: bold;
+}

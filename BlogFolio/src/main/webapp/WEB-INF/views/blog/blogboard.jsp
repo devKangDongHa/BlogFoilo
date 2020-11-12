@@ -50,6 +50,34 @@
 		
 	});
 	
+		function goLike(num){
+			
+			var viewno = num;
+			
+		}
+		
+		function goEdit(num){
+			var viewno = num;
+			
+			location.href="<%=ctxPath%>/Blog/BoardEdit.com?no="+viewno;
+			
+		}
+		
+		function goDel(num){
+			var viewno = num;
+			
+			 if (confirm("정말 삭제하시겠습니까??") == true){    //확인
+
+			     location.href="<%=ctxPath%>/Blog/BoardDelete.com?no="+viewno;
+
+			 }else{   //취소
+
+			     return false;
+
+			 }
+			 
+		}
+	
 </script>
 
 </head>
@@ -60,6 +88,17 @@
 		<div id="BlogMainContainer_View">
 
 			<div id="BlogLeftContainer_View">
+
+			<c:if test="${sessionScope.loginuser.userno == '1' }">
+				<div id="editDelArea">
+					<div id="editArea">
+						<a onclick="goEdit(${boardView.num});">수정</a>
+					</div>
+					<div id="delArea">
+						<a onclick="goDel(${boardView.num});">삭제</a>
+					</div>
+				</div>
+			</c:if>
 
 				<div id="BlogContentList_View">
 					<div id="BlogContentHead_View">
@@ -79,7 +118,7 @@
 				
 				<div id="buttonArea">
 					<div id="goodArea">
-						<a>좋아요</a>
+						<a onclick="goLike('${boardView.num}');">좋아요(${like_count})</a>
 					</div>
 					<div id="commentArea">
 						<a>댓글</a>

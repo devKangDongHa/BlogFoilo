@@ -47,5 +47,20 @@ public interface InterBlogDAO {
 	// 첨부 파일 있는 글 작성
 	int writeEnd_withFile(BoardVO boardvo);
 
+	// 좋아요 갯수
+	String getLike_count(String viewno);
+
+	// 글 삭제
+	int DelWrite(String viewno);
+
+	// 수정 내용 가져오기
+	BoardVO getBoardDetail(String viewno);
+
+	// 글 수정
+	int EditEnd(BoardVO boardvo);
+
+	// 글 수정 파일 첨부
+	int EidtEnd_withFile(BoardVO boardvo);
+
 
 }

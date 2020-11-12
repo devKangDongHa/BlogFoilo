@@ -1,7 +1,6 @@
 package com.project.Blog.controller;
 
 import java.io.File;
-import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
@@ -208,6 +207,8 @@ public class BlogMainController {
 		
 		HashMap<String,String> boardView = service.getBoardView(viewno);
 		
+		String like_count = service.getLike_count(viewno);
+		
 		String categoryname;
 		
 		String categoryno = boardView.get("category_snumber");
@@ -221,6 +222,7 @@ public class BlogMainController {
 		
 		mav.addObject("url", url);
 		
+		mav.addObject("like_count", like_count);
 		mav.addObject("bigcategoryList", bigcategoryList);
 		mav.addObject("smallcategoryList", smallcategoryList);
 		mav.addObject("boardView", boardView);
@@ -446,10 +448,143 @@ public class BlogMainController {
 		
 		return mav;
 	}
-
-	private File File(String string) {
-		// TODO Auto-generated method stub
-		return null;
+	
+	@RequestMapping("/Blog/BoardDelete")
+	public ModelAndView BlogWriteDel(HttpServletRequest request, ModelAndView mav) {
+		
+		String viewno = request.getParameter("no");
+		
+		int n = service.DelWrite(viewno);
+		
+		String loc="";
+		String msg="";
+		
+		if(n == 1) {
+			msg="삭제되었습니다.";
+			loc=request.getContextPath()+"/Blog.com";
+		} else {
+			msg="다시 시도해주십시오.";
+			loc="javascript:history.back()";
+		}
+		
+		mav.addObject("msg", msg);
+		mav.addObject("loc", loc);
+		
+		mav.setViewName("msg2");
+		
+		return mav;
+		
+	}
+	
+	@RequestMapping("/Blog/BoardEdit")
+	public ModelAndView BlogWriteEdit(HttpServletRequest request, ModelAndView mav) {
+		
+		HttpSession session = request.getSession();
+		
+		String viewno = request.getParameter("no");
+		
+		@SuppressWarnings("unchecked")	// 경고 무시 선언
+		HashMap<String, String> usermap = (HashMap<String, String>) session.getAttribute("loginuser");
+		
+		if(usermap == null) {
+			String msg = "비정상적인 접근입니다.";
+			String loc = request.getContextPath()+"/Blog.com";
+			
+			mav.addObject("msg", msg);
+			mav.addObject("loc", loc);
+			
+			mav.setViewName("msg2");
+			
+		} else {
+		
+			BoardVO boardview = service.getBoardDetail(viewno);
+			
+			List<BlogBigCategoryVO> bigcategoryList = service.getBigCategoryList();
+			
+			List<BlogSmallCategoryVO> smallcategoryList = service.getSmallCategoryList();
+			
+			mav.addObject("bigcategoryList", bigcategoryList);
+			mav.addObject("smallcategoryList", smallcategoryList);
+			mav.addObject("boardview", boardview);
+			
+			mav.setViewName("blog/blogedit.tiles1");
+		}
+		
+		return mav;
+		
+	}
+	
+	@RequestMapping("/Blog/WriteEditEnd")
+	public ModelAndView BlogWriteEditEnd(BoardVO boardvo, ModelAndView mav, MultipartHttpServletRequest mrequest) {
+		
+		MultipartFile writethumbnail = boardvo.getWritethumbnail();
+		
+		if(!writethumbnail.isEmpty()) {
+			HttpSession session = mrequest.getSession();
+ 		 	String root = session.getServletContext().getRealPath("/");
+ 		 	String path = root + "resources" + File.separator + "files";
+ 		 	String path2 = "C:\\Git\\BlogFoilo\\BlogFolio\\src\\main\\webapp\\resources\\image";
+ 		 	String newFileName = "";
+ 		 	
+ 		 	byte[] bytes = null;
+ 		 	
+ 		 	long fileSize = 0;
+ 		 	
+ 		 try {
+ 			 
+ 		 	bytes = writethumbnail.getBytes();
+ 		 	
+ 		 	newFileName = fileManager.doFileUpload(bytes, writethumbnail.getOriginalFilename(), path2);
+ 		 	
+ 		 	/*boardvo.setThumbnail(newFileName);*/
+ 		 	boardvo.setThumbnail(newFileName);
+ 		 	
+ 		 	/*boardvo.setOrgFilename(writethumbnail.getOriginalFilename());*/
+ 		 	boardvo.setOrgFilename(writethumbnail.getOriginalFilename());
+ 		 	
+ 		 	fileSize = writethumbnail.getSize();
+			
+ 		 	boardvo.setFileSize(String.valueOf(fileSize));
+ 		 	
+			} catch(Exception e) {
+				e.printStackTrace();
+			}	
+		
+		}
+		
+		   boardvo.setTitle(MyUtil.replaceParameter(boardvo.getTitle()));
+	 	   boardvo.setContent(MyUtil.replaceParameter(boardvo.getContent()));
+	 	   boardvo.setContent(boardvo.getContent().replaceAll("\r\n", "<br/>"));
+	 	   
+	 	  int n = 0;
+	 		if(writethumbnail.isEmpty()) {
+	 			// 첨부파일이 없는 경우이라면
+	 			n = service.EditEnd(boardvo); 
+	 		}
+	 		else {
+	 			// 첨부파일이 있는 경우이라면
+	 			n = service.EditEnd_withFile(boardvo);
+	 		}
+	 		
+	 		String msg = "";
+	 		String loc = "";
+	 		
+	 		if(n>0) {
+	 			msg = "수정 완료";
+	 			loc = mrequest.getContextPath()+"/Blog/Board.com?no="+boardvo.getNum();
+	 		} else {
+	 			msg = "수정 실패";
+	 			loc = "javascript:history.back()";
+	 		}
+	 		
+	 		
+	 		
+	 		mav.addObject("msg", msg);
+	 		mav.addObject("loc", loc);
+	 		
+	 		mav.setViewName("msg2");
+		
+		return mav;
 	}
 	
 }

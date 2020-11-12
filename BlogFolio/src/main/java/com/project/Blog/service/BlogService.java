@@ -103,5 +103,35 @@ public class BlogService implements InterBlogService {
 		return n;
 	}
 
+	@Override
+	public String getLike_count(String viewno) {
+		String like_count = dao.getLike_count(viewno);
+		return like_count;
+	}
+
+	@Override
+	public int DelWrite(String viewno) {
+		int n = dao.DelWrite(viewno);
+		return n;
+	}
+
+	@Override
+	public BoardVO getBoardDetail(String viewno) {
+		BoardVO boardview = dao.getBoardDetail(viewno);
+		return boardview;
+	}
+
+	@Override
+	public int EditEnd(BoardVO boardvo) {
+		int n = dao.EditEnd(boardvo);
+		return n;
+	}
+
+	@Override
+	public int EditEnd_withFile(BoardVO boardvo) {
+		int n = dao.EidtEnd_withFile(boardvo);
+		return n;
+	}
+
 
 }
