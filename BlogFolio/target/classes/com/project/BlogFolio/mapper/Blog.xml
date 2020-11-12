@@ -147,7 +147,7 @@
 	<select id="getLike_count" parameterType="String" resultType="String">
 		SELECT COUNT(*)
 		FROM LIKE_COUNT
-		WHERE CONTENT_NUM = #{viewno}
+		WHERE CONTENT_NUM = #{viewno} AND STATUS = 1
 	</select>
 	
 	<delete id="DelWrite" parameterType="String">
@@ -169,6 +169,21 @@
 		UPDATE BLOGBOARD SET TITLE = #{title}, CONTENT = #{content}, CATEGORY_NUMBER = #{category_number}, CATEGORY_SNUMBER = #{category_snumber}, SUBCONTENT = #{subcontent},
 		THUMBNAIL = #{thumbnail}, ORGFILENAME = #{orgFilename}, FILESIZE = #{fileSize}
 		WHERE NUM = #{num}
+	</update>
+	
+	<select id="CheckLike" parameterType="HashMap" resultType="String">
+		SELECT COUNT(*)
+		FROM LIKE_COUNT
+		WHERE USERNO = #{userno} AND CONTENT_NUM = #{viewno} AND STATUS = 1
+	</select>
+	
+	<insert id="addLike" parameterType="HashMap">
+		INSERT INTO LIKE_COUNT(CONTENT_NUM, USERNO, STATUS)
+		VALUES(#{viewno}, #{userno}, 1)
+	</insert>
+	
+	<update id="cancelLike" parameterType="HashMap">
+		UPDATE LIKE_COUNT SET STATUS = 0 WHERE USERNO = #{userno} AND CONTENT_NUM = #{viewno}
 	</update>
 	
 </mapper>

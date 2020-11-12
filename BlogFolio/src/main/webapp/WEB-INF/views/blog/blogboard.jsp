@@ -54,6 +54,8 @@
 			
 			var viewno = num;
 			
+			location.href="<%=ctxPath%>/Blog/Like.com?no="+viewno;
+			
 		}
 		
 		function goEdit(num){
@@ -76,6 +78,10 @@
 
 			 }
 			 
+		}
+		
+		function loginalert(){
+			alert("로그인이 필요합니다.");
 		}
 	
 </script>
@@ -118,7 +124,17 @@
 				
 				<div id="buttonArea">
 					<div id="goodArea">
+					<c:if test="${ not empty sessionScope.loginuser }">
+					<c:if test="${n eq 0 }">
 						<a onclick="goLike('${boardView.num}');">좋아요(${like_count})</a>
+					</c:if>
+					<c:if test="${n eq 1 }">
+						<a onclick="goLike('${boardView.num}');">좋아요 취소(${like_count })</a>
+					</c:if>	
+					</c:if>
+					<c:if test="${ empty sessionScope.loginuser }">
+						<a onclick="loginalert();">좋아요(${like_count})</a>
+					</c:if>
 					</div>
 					<div id="commentArea">
 						<a>댓글</a>

@@ -127,5 +127,23 @@ public class BlogDAO implements InterBlogDAO {
 		return n;
 	}
 
+	@Override
+	public String CheckLike(HashMap<String, String> checkmap) {
+		String n = sqlsession.selectOne("Blog.CheckLike", checkmap);
+		return n;
+	}
+
+	@Override
+	public int addLike(HashMap<String, String> paramap) {
+		int n = sqlsession.insert("Blog.addLike", paramap);
+		return n;
+	}
+
+	@Override
+	public int cancelLike(HashMap<String, String> paramap) {
+		int n = sqlsession.update("Blog.cancelLike", paramap);
+		return n;
+	}
+
 
 }

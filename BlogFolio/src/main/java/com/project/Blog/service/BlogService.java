@@ -133,5 +133,23 @@ public class BlogService implements InterBlogService {
 		return n;
 	}
 
+	@Override
+	public String CheckLike(HashMap<String, String> checkmap) {
+		String n = dao.CheckLike(checkmap);
+		return n;
+	}
+
+	@Override
+	public int addLike(HashMap<String, String> paramap) {
+		int n = dao.addLike(paramap);
+		return n;
+	}
+
+	@Override
+	public int cancelLike(HashMap<String, String> paramap) {
+		int n = dao.cancelLike(paramap);
+		return n;
+	}
+
 
 }

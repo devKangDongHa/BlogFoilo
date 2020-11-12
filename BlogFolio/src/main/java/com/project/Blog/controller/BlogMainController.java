@@ -198,6 +198,10 @@ public class BlogMainController {
 	@RequestMapping(value="/Blog/Board")
 	public ModelAndView blogBoard(HttpServletRequest request, ModelAndView mav) {
 		
+		HttpSession session = request.getSession();
+		
+		BlogGuestVO loginuser = (BlogGuestVO) session.getAttribute("loginuser");
+		
 		String viewno = request.getParameter("no");
 		String url = request.getParameter("url");
 		
@@ -217,6 +221,18 @@ public class BlogMainController {
 		boardView.put("categoryname", categoryname);
 		
 		List<BlogBoardVO> cateRecentList = service.getCateRecentList(categoryno);
+		
+		if(loginuser != null) {
+		
+			HashMap<String, String> checkmap = new HashMap<String, String>();
+			checkmap.put("userno", loginuser.getUserno());
+			checkmap.put("viewno", viewno);
+			
+		String n = service.CheckLike(checkmap);
+		
+		mav.addObject("n", n);
+		
+		}
 		
 		mav.addObject("cateRecentList", cateRecentList);
 		
@@ -583,6 +599,55 @@ public class BlogMainController {
 	 		mav.addObject("loc", loc);
 	 		
 	 		mav.setViewName("msg2");
+		
+		return mav;
+	}
+	
+	@RequestMapping("/Blog/Like")
+	public ModelAndView Like(HttpServletRequest request, ModelAndView mav) {
+		
+		HttpSession session = request.getSession();
+		
+		String viewno = request.getParameter("no");
+		
+		BlogGuestVO loginuser = (BlogGuestVO) session.getAttribute("loginuser");
+		
+		HashMap<String, String> paramap = new HashMap<String, String>();
+		
+		paramap.put("userno", loginuser.getUserno());
+		paramap.put("userid", loginuser.getUserid());
+		paramap.put("viewno", viewno);
+		
+		HashMap<String, String> checkmap = new HashMap<String, String>();
+		checkmap.put("userno", loginuser.getUserno());
+		checkmap.put("viewno", viewno);
+		
+		String msg = "";
+		String loc = "";
+		
+		String check = service.CheckLike(checkmap);
+		
+		if("0".equals(check)) {
+			int n = service.addLike(paramap);
+
+			if(n==1) {
+				msg = "감사합니다.";
+				loc = request.getContextPath()+"/Blog/Board.com?no="+viewno;
+			}
+			
+		} else {
+			int n = service.cancelLike(paramap);
+			
+			if(n==1) {
+				msg = "힝";
+				loc = request.getContextPath()+"/Blog/Board.com?no="+viewno;
+			}
+		}
+		
+		mav.addObject("msg",msg);
+		mav.addObject("loc", loc);
+		
+		mav.setViewName("msg2");
 		
 		return mav;
 	}

@@ -68,6 +68,15 @@ public interface InterBlogService {
 	// 글 수정 파일첨부
 	int EditEnd_withFile(BoardVO boardvo);
 
+	// 로그인 중인 게스트 유저의 해당 글 좋아요 여부 조회
+	String CheckLike(HashMap<String, String> checkmap);
+
+	// 좋아요
+	int addLike(HashMap<String, String> paramap);
+
+	// 좋아요 취소
+	int cancelLike(HashMap<String, String> paramap);
+
 
 
 }
