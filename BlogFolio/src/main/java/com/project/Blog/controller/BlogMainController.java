@@ -200,7 +200,11 @@ public class BlogMainController {
 		
 		HttpSession session = request.getSession();
 		
-		BlogGuestVO loginuser = (BlogGuestVO) session.getAttribute("loginuser");
+		HashMap<String, String> map = new HashMap<String, String>();
+		
+		BlogGuestVO guestvo = new BlogGuestVO();
+		
+		
 		
 		String viewno = request.getParameter("no");
 		String url = request.getParameter("url");
@@ -222,16 +226,18 @@ public class BlogMainController {
 		
 		List<BlogBoardVO> cateRecentList = service.getCateRecentList(categoryno);
 		
+		BlogGuestVO loginuser = (BlogGuestVO)session.getAttribute("loginuser");
+		
 		if(loginuser != null) {
-		
-			HashMap<String, String> checkmap = new HashMap<String, String>();
-			checkmap.put("userno", loginuser.getUserno());
-			checkmap.put("viewno", viewno);
+				
+				HashMap<String, String> checkmap = new HashMap<String, String>();
+				checkmap.put("userno", loginuser.getUserno());
+				checkmap.put("viewno", viewno);
+				
+			String n = service.CheckLike(checkmap);
 			
-		String n = service.CheckLike(checkmap);
-		
-		mav.addObject("n", n);
-		
+			mav.addObject("n", n);
+			
 		}
 		
 		mav.addObject("cateRecentList", cateRecentList);
@@ -309,10 +315,10 @@ public class BlogMainController {
 		map.put("userid", userid);
 		map.put("userpw", SHA256.encrypt(userpw));
 		
-		HashMap<String, String> usermap = service.isExistUser(map);
-
+		BlogGuestVO loginuser = service.isExistUser(map);
 		
-		if(usermap == null) {
+		
+		if(loginuser == null) {
 			String msg = "아이디 혹은 비밀번호가 잘못되었습니다.";
 			loc = request.getContextPath()+"/Blog/Login.com";
 			mav.addObject("msg", msg);
@@ -323,7 +329,7 @@ public class BlogMainController {
 			
 			HttpSession session = request.getSession();
 			
-			session.setAttribute("loginuser", usermap);
+			session.setAttribute("loginuser", loginuser);
 			
 			loc = request.getContextPath()+"Blog.com";
 			

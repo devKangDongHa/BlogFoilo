@@ -56,9 +56,9 @@ public class BlogService implements InterBlogService {
 	}
 
 	@Override
-	public HashMap<String, String> isExistUser(HashMap<String, String> map) {
-		HashMap<String, String> usermap = dao.isExistUser(map);
-		return usermap;
+	public BlogGuestVO isExistUser(HashMap<String, String> map) {
+		BlogGuestVO loginuser = dao.isExistUser(map);
+		return loginuser;
 	}
 
 	@Override

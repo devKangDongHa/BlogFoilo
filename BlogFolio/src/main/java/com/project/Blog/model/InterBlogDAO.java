@@ -24,7 +24,7 @@ public interface InterBlogDAO {
 	BlogGuestVO getLoginGuest(String userid);
 
 	// 로그인 검사
-	HashMap<String, String> isExistUser(HashMap<String, String> map);
+	BlogGuestVO isExistUser(HashMap<String, String> map);
 
 	// 검색 조건, 카테고리 없을 때 게시글 수
 	int getTotalCountWithNOsarch();

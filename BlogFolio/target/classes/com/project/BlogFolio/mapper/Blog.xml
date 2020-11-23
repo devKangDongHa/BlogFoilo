@@ -72,13 +72,7 @@
 		WHERE USERID = #{userid}
 	</select>
 	
-	<resultMap type="HashMap" id="usermap">
-		<result property="userno"	column="USERNO" javaType="String" />
-		<result property="userid"	column="USERID" javaType="String" />
-		<result property="username"	column="USERNAME" javaType="String" />
-	</resultMap>
-	
-	<select id="isExistUser" parameterType="HashMap" resultMap="usermap">
+	<select id="isExistUser" parameterType="HashMap" resultType="com.project.Blog.model.BlogGuestVO">
 		SELECT USERNO, USERID, USERNAME
 		FROM BLOGUSER
 		WHERE USERID = #{userid} AND USERPW = #{userpw}
