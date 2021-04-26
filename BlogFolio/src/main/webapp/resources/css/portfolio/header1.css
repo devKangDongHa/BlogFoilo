@@ -1,0 +1,64 @@
+@charset "UTF-8";
+
+html {
+	font-size: 20px;
+}
+
+body {
+	font-size: 1rem;
+}
+
+a {
+	text-decoration: none;
+	color: #000000;
+}
+
+ul {
+	list-style-type: none;
+}
+
+.header_wrap {
+	height: 5rem;
+	background: #dab3ff;
+}
+
+.title {
+	margin: 0 auto;
+	padding-top: 1rem;
+	width: 7.5rem;
+}
+
+.title > a:hover {
+	cursor: pointer;
+}
+
+.header {
+	display: flex;
+	margin: 0 auto;
+	justify-content: space-between;
+}
+
+.header ul {
+	display: none;
+}
+
+.header .btn_choice {
+	margin: 0 auto;
+	width: 1.5rem;
+	height: 2rem;
+	background: url(../images/check.png) no-repeat;
+	display: none;
+}
+
+.header .btn_menu {
+	margin: 0 auto;
+	width: 1.5rem;
+	height: 2rem;
+	background: url(../images/menu.png) no-repeat;
+	display: none;
+}
+
+.header ul li {
+	flex: 1;
+}
+

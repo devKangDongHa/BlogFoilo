@@ -18,14 +18,6 @@ body{
 	margin: 0;
 }
 
-#myheader {
-    left: 0;
-    right: 0;
-    min-width: 1160px;
-    width: 100%;
-    height: 500px;
-}
-
 </style>
  	
 </head>

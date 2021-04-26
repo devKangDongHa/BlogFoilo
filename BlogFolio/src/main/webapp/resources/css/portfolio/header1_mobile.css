@@ -1,0 +1,37 @@
+@charset "UTF-8";
+
+	
+.header {
+	vertical-align: bottom;
+}
+	
+	.header .btn_choice {
+		margin: 0 auto;
+		width: 2.5rem;
+		height: 2.7rem;
+		background: url(../images/checkcircle.png) center 0.75rem no-repeat;
+		display: block;
+		padding: 0 0.4rem;
+	}
+
+	.header .btn_menu {
+		margin: 0 auto;
+		width: 2.5rem;
+		height: 2.7rem;
+		background: url(../images/menu.png) center 0.75rem no-repeat;
+		display: block;
+		padding: 0 0.4rem;
+	}
+
+	.header ul {
+		display: flex;
+		width: auto;
+		margin: 0;
+		padding-top: 1rem;
+		padding-right: 1.5rem;
+		margin-right: 0;
+	}
+	
+	.header ul li:hover {
+		cursor: pointer;
+	}
