@@ -9,7 +9,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
-<link rel="stylesheet" type="text/css" href="<%=ctxPath%>/resources/css/blogmain.css" />
+<link rel="stylesheet" type="text/css" href="<%=ctxPath%>/resources/css/blog/blogmain.css" />
 
 <script type="text/javascript" src="http://code.jquery.com/jquery-3.2.0.min.js" ></script>
 <script type="text/javascript">

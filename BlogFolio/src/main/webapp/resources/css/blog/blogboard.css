@@ -130,6 +130,10 @@ li a:hover {
 	border: solid 1px #bbbbbb;
 }
 
+#goodArea > a:hover {
+	cursor: pointer;
+}
+
 #commentArea {
 	float: left;
 	width: 100px;

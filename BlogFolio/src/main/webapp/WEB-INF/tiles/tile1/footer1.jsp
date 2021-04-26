@@ -3,7 +3,7 @@
     
 <% String ctxPath = request.getContextPath(); %>
 
-<link rel="stylesheet" type="text/css" href="<%=ctxPath%>/resources/css/footer1.css" />
+<link rel="stylesheet" type="text/css" href="<%=ctxPath%>/resources/css/blog/footer1.css" />
 
 
 <div id="footer">
